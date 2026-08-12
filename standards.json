@@ -4,64 +4,229 @@
         "defaultSafety": "Full structural/high-visibility PPE. Establish positive blocking apparatus positioning and sequential cone tapers prior to commencing work on roadway.",
         "skills": [
             { "id": "tm_01", "name": "Apparatus Positioning (Fend-Off Angle)", "standard": "NFPA 1901 / CSA Z1507", "description": "Position apparatus at a 45-degree angle pointing away from the work zone to create a physical traffic barrier." },
-            { "id": "tm_02", "name": "Cone Taper & Buffer Zone Deployment", "standard": "Local JPR TM-04", "description": "Deploy sequential traffic cones to establish an active merge taper and a protected lane buffer." }
+            { "id": "tm_02", "name": "Cone Taper & Buffer Zone Deployment", "standard": "Local JPR TM-04", "description": "Deploy sequential traffic cones to establish an active merge taper and a protected lane buffer." },
+            { "id": "tm_03", "name": "High-Visibility Vest & PPE Donning", "standard": "NFPA 1500", "description": "Properly fit and wear ANSI/CSA Class 3 high-visibility garments on roadway operations." },
+            { "id": "tm_04", "name": "Flares & Electronic LED Signal Placement", "standard": "CSA Z1507", "description": "Safely place advance warning pyrotechnic flares or LED triangles upstream of the incident." },
+            { "id": "tm_05", "name": "Single-Lane Alternating Traffic Control", "standard": "NFPA 1001", "description": "Direct civilian traffic safely past an active accident scene using standard hand signals and wands." },
+            { "id": "tm_06", "name": "Nighttime Scene Illumination Setup", "standard": "NFPA 1901", "description": "Position floodlights and telescoping scene lights to illuminate workers without blinding oncoming drivers." },
+            { "id": "tm_07", "name": "Secondary Collision Hazard Monitoring", "standard": "NFPA 1521", "description": "Assign a dedicated safety lookout to monitor distracted or oncoming motorists approaching the buffer." },
+            { "id": "tm_08", "name": "Emergency Vehicle Demobilization & Lane Reopening", "standard": "Local SOG", "description": "Coordinate the systematic recovery of cones, equipment, and apparatus to safely restore normal traffic flow." },
+            { "id": "tm_09", "name": "Highway Incident Command Coordination", "standard": "NFPA 1561", "description": "Establish unified or single command interface with local highway maintenance or police authorities." },
+            { "id": "tm_10", "name": "Emergency Air Horn Warning Protocol", "standard": "NFPA 1500", "description": "Execute rapid evacuation warning blasts using apparatus air horns upon detecting an incoming errant vehicle." }
         ],
-        "resources": ["Traffic Cones / Pylons (Min. 6)", "ANSI/CSA Class 3 Safety Vests", "Emergency Flares / LED Triangles", "Air Horn (Emergency warning device)"]
+        "resources": [
+            "Traffic Cones / Pylons (Min. 8)",
+            "ANSI/CSA Class 3 Safety Vests",
+            "Emergency Flares / LED Triangles",
+            "Handheld Traffic Wands & Radios",
+            "Heavy Rescue / Engine Apparatus (Positive Block)"
+        ]
     },
     "forcible_entry": {
         "categoryName": "Forcible Entry Techniques",
         "defaultSafety": "Safety glasses and heavy leather gloves mandatory. Control tool leverage points to prevent slips and clear bystanders from swing radius.",
         "skills": [
-            { "id": "fe_01", "name": "Inward-Swinging Door Forcing (The Irons)", "standard": "NFPA 1001 (5.3.2)", "description": "Properly gap, set, and force an inward-swinging door using a flat-head axe and Halligan bar." }
+            { "id": "fe_01", "name": "Inward-Swinging Door Forcing (The Irons)", "standard": "NFPA 1001 (5.3.2)", "description": "Properly gap, set, and force an inward-swinging door using a flat-head axe and Halligan bar." },
+            { "id": "fe_02", "name": "Outward-Swinging Door Hinge Removal", "standard": "NFPA 1001 (5.3.2)", "description": "Defeat door hinges using a Halligan bar to bypass commercial security pins." },
+            { "id": "fe_03", "name": "Padlock Forcing (Duck-Billed / Striking)", "standard": "NFPA 1001", "description": "Quickly shear or force hardened padlocks using wedge tools and striking force." },
+            { "id": "fe_04", "name": "K-Tool / Rim Lock Cylinder Pulling", "standard": "NFPA 1001", "description": "Extract rim lock cylinders cleanly from commercial doors to expose the internal locking mechanism." },
+            { "id": "fe_05", "name": "Through-the-Lock Technique", "standard": "NFPA 1001", "description": "Manipulate internal mortise lock latches directly without causing catastrophic door damage." },
+            { "id": "fe_06", "name": "Rotary Saw Security Door Cutting", "standard": "NFPA 1003", "description": "Perform controlled triangle or straight cuts on metal roll-up or security gates using a power saw." },
+            { "id": "fe_07", "name": "Door Control Strap Application", "standard": "NFPA 1001", "description": "Secure a forced door in a controlled, latched position to manage flow path entry." },
+            { "id": "fe_08", "name": "Window Breaching & Raking", "standard": "NFPA 1001", "description": "Safely vent, break, and rake double-hung or tempered glass windows for secondary access." },
+            { "id": "fe_09", "name": "Commercial Heavy Metal Door Forcing", "standard": "NFPA 1001", "description": "Utilize hydraulic spreader tools or heavy-duty forcible entry props on commercial door frames." },
+            { "id": "fe_10", "name": "Hydraulic Door Breaker Operations", "standard": "NFPA 1006", "description": "Deploy battery-operated hydraulic rams to force stubborn inward or outward doors rapidly." }
         ],
-        "resources": ["Halligan Bar & Flat-Head Axe ('The Irons')", "K-Tool / Multi-Master Forcible Entry Kit", "Door Control Straps"]
+        "resources": [
+            "Halligan Bar & Flat-Head Axe ('The Irons')",
+            "K-Tool / Multi-Master Forcible Entry Kit",
+            "Door Control Straps & Chocks",
+            "Rotary Saw with Metal & Masonry Blades",
+            "Hydraulic Door Ram / Spreader"
+        ]
     },
     "vehicle_extrication": {
         "categoryName": "Vehicle Extrication & Stabilization",
         "defaultSafety": "Full structural PPE with eye protection and heavy rescue gloves. Disconnect 12V/high-voltage power sources, crib vehicle securely before tool operation.",
-        "skills": [],
-        "resources": ["Hydraulic Spreader, Cutter, and Ram Kit", "Step Chocks & Cribbing Blocks", "Glass Management Kit"]
+        "skills": [
+            { "id": "ve_01", "name": "Rapid 4-Point Vehicle Stabilization", "standard": "NFPA 1006 (10.2)", "description": "Stabilize an unstable or on-side vehicle using step chocks, wedges, and struts." },
+            { "id": "ve_02", "name": "12V and High-Voltage Hybrid Power Disconnection", "standard": "NFPA 1006", "description": "Locate and sever primary battery circuits and identify high-voltage orange cables safely." },
+            { "id": "ve_03", "name": "Tempered Glass Management & Containment", "standard": "NFPA 1001", "description": "Protect vehicle occupants using contact paper, tape, and protective tarps before breaking glass." },
+            { "id": "ve_04", "name": "Laminated Windshield Removal (Saw/Axe)", "standard": "NFPA 1001", "description": "Cut out front windshield glass completely using manual hand saws or reciprocating saws." },
+            { "id": "ve_05", "name": "B-Post Roll / Roof Flap Maneuver", "standard": "NFPA 1006", "description": "Cut and fold a vehicle roof forward or backward to create a massive extrication portal." },
+            { "id": "ve_06", "name": "Patient Protection & Tarping", "standard": "NFPA 1006", "description": "Cover patients with wool blankets, backboards, and hard shields during tool operations." },
+            { "id": "ve_07", "name": "Dashboard Displacement (Ram & Relief Cuts)", "standard": "NFPA 1006", "description": "Displace crushed dashboards forward using hydraulic rams to free trapped lower extremities." },
+            { "id": "ve_08", "name": "Third-Door Conversion / Rear Hatch Access", "standard": "NFPA 1006", "description": "Force rear tailgates or side panels to create an alternate extraction pathway." },
+            { "id": "ve_09", "name": "Steering Wheel Displacement / Tilt", "standard": "NFPA 1006", "description": "Pull or push steering wheels away from the driver's chest using specialty chains and pullers." },
+            { "id": "ve_10", "name": "Under-Ride Truck Stabilization & Lifting", "standard": "NFPA 1006", "description": "Lift heavy transport trucks or trailers using high-pressure pneumatic lifting bags." }
+        ],
+        "resources": [
+            "Hydraulic Spreader, Cutter, and Ram Kit",
+            "Step Chocks, Wood Cribbing, and Wedges",
+            "Manual Mechanical Struts / Rescue Jacks",
+            "Glass Management Kit & Protective Tarps",
+            "Battery Reciprocating Saw & Impact Kit"
+        ]
     },
     "driving": {
         "categoryName": "Apparatus Driving & Emergency Operations",
-        "defaultSafety": "Seatbelts mandatory for all crew members prior to apparatus movement. Comply with local provincial traffic laws.",
-        "skills": [],
-        "resources": ["Apparatus Pre-Trip Inspection Sheets", "Spotters / Backing Guide Equipment"]
+        "defaultSafety": "Seatbelts mandatory for all crew members prior to apparatus movement. Comply with local provincial traffic laws and intersection protocols.",
+        "skills": [
+            { "id": "dr_01", "name": "Apparatus Pre-Trip & Post-Trip Inspection", "standard": "NFPA 1002 (4.2)", "description": "Conduct a comprehensive walk-around check of fluid levels, tires, brakes, and warning devices." },
+            { "id": "dr_02", "name": "Controlled Intersection Negotiation", "standard": "NFPA 1002", "description": "Execute complete stops at red lights/stop signs and ensure visual confirmation before proceeding." },
+            { "id": "dr_03", "name": "Serpentine & Off-Set Alley Driving", "standard": "NFPA 1002 (4.3)", "description": "Maneuver a heavy fire apparatus smoothly through tight cone courses without striking markers." },
+            { "id": "dr_04", "name": "Reverse Diminishing Clearance Maneuver", "standard": "NFPA 1002", "description": "Back up an apparatus accurately into a restricted bay using mirrors and designated spotters." },
+            { "id": "dr_05", "name": "All-Weather Emergency Braking & Skidding Control", "standard": "NFPA 1002", "description": "Manage anti-lock braking systems and maintain vehicle control on wet or icy roadways." },
+            { "id": "dr_06", "name": "Apparatus Spotting & Backing Hand Signals", "standard": "NFPA 1500", "description": "Communicate effectively with ground spotters using standardized hand signals while backing." },
+            { "id": "dr_07", "name": "Grade Parking & Wheel Choking Protocols", "standard": "NFPA 1002", "description": "Secure apparatus safely on steep inclines using wheel chocks and turned front wheels." },
+            { "id": "dr_08", "name": "Route Selection & Bridge Weight Compliance", "standard": "NFPA 1002", "description": "Plan safe transit routes factoring in overhead bridge clearances and weight restriction limits." },
+            { "id": "dr_09", "name": "Emergency Response Mode Transition", "standard": "NFPA 1500", "description": "Engage optical and audible warning devices safely while navigating traffic flow." },
+            { "id": "dr_10", "name": "Trench / Soft Shoulder Recovery", "standard": "NFPA 1002", "description": "Recover control safely if apparatus tires drop off the paved road shoulder." }
+        ],
+        "resources": [
+            "Apparatus Pre-Trip Inspection Sheets",
+            "Traffic Pylons for Driving Course",
+            "Wheel Chocks & Safety Vests",
+            "Two-Way Radios for Spotters",
+            "Heavy Rescue / Engine Apparatus"
+        ]
     },
     "pumping": {
         "categoryName": "Fire Pump Operations & Hydraulics",
-        "defaultSafety": "Wear eye and hearing protection when operating high-pressure pump panels.",
-        "skills": [],
-        "resources": ["Engine / Pumper Apparatus", "Hydrant Wrenches & Gate Valves", "Supply and Attack Hose Lines"]
+        "defaultSafety": "Wear eye and hearing protection when operating high-pressure pump panels. Stand clear of uncoupled or pressurized supply lines.",
+        "skills": [
+            { "id": "pu_01", "name": "Drafting Water from a Static Source", "standard": "NFPA 1002 (5.2)", "description": "Prime and draw water successfully from a pond, cistern, or dry hydrant using hard suction hose." },
+            { "id": "pu_02", "name": "Hydrant Connection & Water Supply Establishment", "standard": "NFPA 1002 (5.3)", "description": "Connect supply lines from a municipal hydrant to pump intake using correct gate valves." },
+            { "id": "pu_03", "name": "Friction Loss & Pump Discharge Pressure (PDP) Calculation", "standard": "NFPA 1002 (5.1)", "description": "Calculate correct discharge pressures manually or via quick reference tables for multiple lines." },
+            { "id": "pu_04", "name": "Tank-to-Pump Water Supply Operation", "standard": "NFPA 1002", "description": "Supply initial attack lines directly from onboard booster tanks before external water arrives." },
+            { "id": "pu_05", "name": "Relay Pumping Setup & Water Shuttle", "standard": "NFPA 1002 (5.5)", "description": "Connect multiple engines sequentially to supply water over long rural distances." },
+            { "id": "pu_06", "name": "Foam Proportioning System Activation", "standard": "NFPA 1002 (5.4)", "description": "Engage on-board or in-line eductor foam systems for Class A or B suppression operations." },
+            { "id": "pu_07", "name": "Master Stream Appliance Deployment", "standard": "NFPA 1002", "description": "Operate deck guns or portable monitor streams safely at high flow volumes." },
+            { "id": "pu_08", "name": "Pump Overheating & Thermal Relief Management", "standard": "NFPA 1002", "description": "Monitor engine water temperature and activate auxiliary cooling valves during prolonged operations." },
+            { "id": "pu_09", "name": "Burst Hoseline Isolation & Pressure Adjustment", "standard": "NFPA 1002", "description": "Shut down or gate off a ruptured hoseline quickly while maintaining pressure on active lines." },
+            { "id": "pu_10", "name": "Post-Operation Pump Drainage & Winterization", "standard": "NFPA 1002", "description": "Drain pump casings and lines completely to prevent freezing damage in cold weather climates." }
+        ],
+        "resources": [
+            "Engine / Pumper Apparatus",
+            "6-inch Hard Suction Hose & Strainer",
+            "Hydrant Wrenches, Storz Adapters, and Gate Valves",
+            "Supply and Attack Hose Lines",
+            "Friction Loss Slide Rule / Calculator"
+        ]
     },
     "interior_operations": {
         "categoryName": "Interior Firefighting Operations",
         "defaultSafety": "Full structural PPE with SCBA fully donned and checked prior to entering IDLH atmosphere. Maintain team integrity (PAR checks).",
-        "skills": [],
-        "resources": ["Full Structural PPE & SCBA", "Thermal Imaging Camera (TIC)", "Attack Line (1.75\" or 2.5\")"]
+        "skills": [
+            { "id": "in_01", "name": "SCBA Air Management & Emergency Transfill", "standard": "NFPA 1001 (5.3.1)", "description": "Monitor cylinder air levels, calculate point of no return, and practice emergency buddy breathing." },
+            { "id": "in_02", "name": "Forced Entry & Flow Path Control", "standard": "NFPA 1001 (5.3.2)", "description": "Control door status upon entry to prevent sudden ventilation-induced flashovers." },
+            { "id": "in_03", "name": "Hoseline Advancement up Stairs & Corners", "standard": "NFPA 1001 (5.3.10)", "description": "Flake out and advance a charged or dry 1-3/4 inch attack line smoothly into upper floors." },
+            { "id": "in_04", "name": "Fire Attack & Three-Dimensional Nozzle Pointers", "standard": "NFPA 1001", "description": "Apply correct straight, fog, or solid streams using smooth bore or combination nozzles." },
+            { "id": "in_05", "name": "Primary & Secondary Search Techniques", "standard": "NFPA 1001 (5.3.9)", "description": "Search smoke-filled rooms systematically using orientation walls, webbing, and search ropes." },
+            { "id": "in_06", "name": "Thermal Imaging Camera (TIC) Navigation", "standard": "NFPA 1001", "description": "Read thermal signatures, locate victims, and identify hot spots or hidden void fires using a TIC." },
+            { "id": "in_07", "name": "Vertical & Horizontal Ventilation Coordination", "standard": "NFPA 1001 (5.3.11)", "description": "Coordinate interior fire attack with timely roof or window venting operations." },
+            { "id": "in_08", "name": "Rapid Intervention Team (RIT) Self-Rescue", "standard": "NFPA 1404", "description": "Execute firefighter survival maneuvers including low-profile crawling and wire entanglement escape." },
+            { "id": "in_09", "name": "Overhaul & Hidden Fire Detection", "standard": "NFPA 1001 (5.3.13)", "description": "Open up walls, ceilings, and structural voids safely to check for extension." },
+            { "id": "in_10", "name": "Personnel Accountability Report (PAR) Execution", "standard": "NFPA 1561", "description": "Conduct voice or radio check-ins verifying crew location, safety, and air status on command." }
+        ],
+        "resources": [
+            "Full Structural PPE & SCBA Pack",
+            "Thermal Imaging Camera (TIC)",
+            "1-3/4 inch Attack Hoseline & Nozzle",
+            "Halligan Bar & Flat-Head Axe ('The Irons')",
+            "Search Webbing / Lifeline Strap"
+        ]
     },
     "command_operations": {
         "categoryName": "Incident Command & Scene Management",
         "defaultSafety": "Establish formal Incident Command Post (ICP) in a safe, visible location outside the immediate hazard zone.",
-        "skills": [],
-        "resources": ["Incident Command Vest & Worksheet Board", "Portable Radios", "Accountability System"]
+        "skills": [
+            { "id": "co_01", "name": "Initial Size-Up & Command Assumption", "standard": "NFPA 1561 (4.2)", "description": "Give a concise initial radio report (WEY-GO: Where am I, What do I Have, What am I Doing)." },
+            { "id": "co_02", "name": "Establishment of Incident Command Post (ICP)", "standard": "NFPA 1561", "description": "Set up a designated command post vehicle or board with visible green command flashing light." },
+            { "id": "co_03", "name": "Tactical Radio Traffic Discipline", "standard": "NFPA 1561", "description": "Use clear text communication, acknowledging orders and avoiding clogged radio channels." },
+            { "id": "co_04", "name": "Establishing Functional & Divisional Sectors", "standard": "NFPA 1561", "description": "Delegate operational groups (Division Alpha, Ventilation, RIT) as incident complexity scales." },
+            { "id": "co_05", "name": "Personnel Accountability Tag Board System", "standard": "NFPA 1500", "description": "Manage passport tags and track crew entry/exit times into IDLH risk zones." },
+            { "id": "co_06", "name": "Strategy Shift: Offensive to Defensive Transition", "standard": "NFPA 1561", "description": "Order emergency withdrawal and shift strategy when structural integrity becomes compromised." },
+            { "id": "co_07", "name": "Emergency Evacuation Tone & Roll Call", "standard": "NFPA 1500", "description": "Broadcast emergency air-horn blasts and radio tones, followed by an immediate PAR check." },
+            { "id": "co_08", "name": "Establishing Staging Area for Incoming Resources", "standard": "NFPA 1561", "description": "Designate a secure staging officer to hold unassigned apparatus out of the hazard path." },
+            { "id": "co_09", "name": "Multi-Agency Unified Command Coordination", "standard": "NFPA 1561", "description": "Integrate police, EMS, and municipal utility representatives into joint decision structures." },
+            { "id": "co_10", "name": "Post-Incident Debriefing & Hot Wash", "standard": "NFPA 1500", "description": "Lead an organized tactical critique with all operating crews prior to leaving the scene." }
+        ],
+        "resources": [
+            "Incident Command Vest & Worksheet Clipboard",
+            "Portable Two-Way Radios with Extra Batteries",
+            "Personnel Accountability Passport Board",
+            "Command Light & Marker Pens",
+            "Emergency Response Reference Guides"
+        ]
     },
     "technical_rescue": {
         "categoryName": "Technical Rescue (Rope, Confined Space, Trench)",
-        "defaultSafety": "Dual-path safety rope systems mandatory for all elevated or below-grade loads. Complete atmospheric monitoring.",
-        "skills": [],
-        "resources": ["Kernmantle Rescue Ropes & Webbing", "Pulleys, Carabiners, and Anchor Plates", "Tripod System"]
+        "defaultSafety": "Dual-path independent safety rope systems mandatory for all elevated or below-grade loads. Complete atmospheric monitoring.",
+        "skills": [
+            { "id": "tr_01", "name": "Anchor System Rigging (Class III / Multipitch)", "standard": "NFPA 1006 (Chapter 5)", "description": "Construct bombproof wrap-3-pull-2 or engineered anchor points using kernmantle rope." },
+            { "id": "tr_02", "name": "Mechanical Advantage System Setup (3:1 / 4:1)", "standard": "NFPA 1006", "description": "Rig pulley systems (Z-rig) to haul loads or personnel with minimal physical effort." },
+            { "id": "tr_03", "name": "Belay Line Operation & Tandem Prusik Rigging", "standard": "NFPA 1006", "description": "Tend an independent safety belay line continuously while a technician ascends or descends." },
+            { "id": "tr_04", "name": "Confined Space Atmospheric Monitoring & Ventilation", "standard": "NFPA 1006 (7.1)", "description": "Test internal atmospheres for oxygen levels, LEL, carbon monoxide, and hydrogen sulfide." },
+            { "id": "tr_05", "name": "Tripod & High-Point Directional Erection", "standard": "NFPA 1006", "description": "Set up mechanical tripods over vertical manholes or shafts with safety guy lines." },
+            { "id": "tr_06", "name": "Patient Packaging in Flexible Stretcher / Sked", "standard": "NFPA 1006", "description": "Secure a simulated patient safely into a litter using color-coded webbing and straps." },
+            { "id": "tr_07", "name": "Trench Collapse Panel & Shore Insertion", "standard": "NFPA 1006 (Chapter 8)", "description": "Install pneumatic or timber vertical shores to stabilize unstable trench walls." },
+            { "id": "tr_08", "name": "High-Angle Rope Rescue Lowering & Raising", "standard": "NFPA 1006", "description": "Lower and recover a rescue technician over an edge using rack or brake-bar devices." },
+            { "id": "tr_09", "name": "Victim Pick-off from Elevated Structure", "standard": "NFPA 1006", "description": "Descend to a suspended victim, connect them to your harness, and transfer load to lower." },
+            { "id": "tr_10", "name": "Technical Rescue Safety Officer Hazard Audit", "standard": "NFPA 1521", "description": "Inspect all knots, carabiners, harnesses, and edge protectors prior to loading systems." }
+        ],
+        "resources": [
+            "Kernmantle Rescue Ropes (Static 1/2 inch)",
+            "Pulleys, Carabiners, Prusik Cords, and Anchor Plates",
+            "Tripod System & Winch",
+            "Multi-Gas Atmospheric Detector",
+            "Sked Stretcher & Edge Protection Rollers"
+        ]
     },
     "dangerous_goods": {
         "categoryName": "Dangerous Goods / Hazmat Response",
         "defaultSafety": "Approach upwind and uphill. Maintain safe isolation distances utilizing the Emergency Response Guidebook (ERG).",
-        "skills": [],
-        "resources": ["Emergency Response Guidebook (ERG)", "Chemical Protective Suits", "Multi-Gas Detectors"]
+        "skills": [
+            { "id": "dg_01", "name": "ERG Identification & Placard Recognition", "standard": "NFPA 472 / 1072", "description": "Identify UN numbers, hazard classes, and isolation radiuses using the Emergency Response Guidebook." },
+            { "id": "dg_02", "name": "Upwind / Uphill Hot Zone Perimeter Establishment", "standard": "NFPA 472", "description": "Set safe isolation boundaries (Hot, Warm, Cold zones) using colored barrier tape." },
+            { "id": "dg_03", "name": "Level A / Level B Chemical Suit Donning", "standard": "NFPA 472", "description": "Don vapor-protective or splash-protective chemical suits with assistant support." },
+            { "id": "dg_04", "name": "Multi-Gas Detector & Radiation Meter Operation", "standard": "NFPA 472", "description": "Calibrate and sweep an unknown spill area using multi-gas and radiation detection meters." },
+            { "id": "dg_05", "name": "Emergency Decontamination Corridor Setup", "standard": "NFPA 472", "description": "Set up a multi-stage wash and rinse decon station for contaminated entry teams." },
+            { "id": "dg_06", "name": "Compressed Gas Cylinder Leak Mitigation (Ton/Chlorine)", "standard": "NFPA 472", "description": "Apply specialized emergency capping kits (A, B, C kits) to leaking compressed gas containers." },
+            { "id": "dg_07", "name": "Product Diking, Damming, and Diversion", "standard": "NFPA 472", "description": "Use absorbent booms, dirt, and pads to steer liquid spills away from storm drains." },
+            { "id": "dg_08", "name": "Overpack Drum Transfer Operations", "standard": "NFPA 472", "description": "Place a leaking container safely inside a larger certified overpack salvage drum." },
+            { "id": "dg_09", "name": "Flammable Liquid Foam Blanketing", "standard": "NFPA 472", "description": "Apply AR-AFFF foam blanket over pooled flammable fuel spills to suppress vapor ignition." },
+            { "id": "dg_10", "name": "Technical Hazmat Briefing & Debriefing", "standard": "NFPA 472", "description": "Hand off technical incident logs and exposure records safely to provincial environmental agencies." }
+        ],
+        "resources": [
+            "Emergency Response Guidebook (ERG)",
+            "Chemical Protective Suits (Level A/B)",
+            "Multi-Gas Detectors & Radiation Meters",
+            "Absorbent Booms, Pads, and Diking Materials",
+            "Emergency Decontamination Shower Pool"
+        ]
     },
     "wildland_fire": {
         "categoryName": "Wildland Fire Suppression & Urban Interface",
-        "defaultSafety": "Wear certified wildland PPE (nomex, boots, helmets). Identify escape routes and safety zones (LACES protocol).",
-        "skills": [],
-        "resources": ["Wildland Nomex PPE & Fire Shelters", "Pulaski, McLeod, and Drip Torches", "Wildland Brush Engine"]
+        "defaultSafety": "Wear certified wildland PPE (nomex, leather boots, helmets). Identify escape routes and safety zones using LACES protocol.",
+        "skills": [
+            { "id": "wf_01", "name": "LACES Protocol & Safety Briefing Execution", "standard": "NFPA 1051", "description": "Establish Lookouts, Communications, Escape Routes, and Safety Zones prior to attack." },
+            { "id": "wf_02", "name": "Handline Construction (Scrape to Mineral Soil)", "standard": "NFPA 1051", "description": "Construct a fire containment line using Pulaski and McLeod tools down to bare mineral soil." },
+            { "id": "wf_03", "name": "Portable Wildland Pump & Hose Lay Deployment", "standard": "NFPA 1051", "description": "Deploy lightweight forestry hose lays and portable pumps over rough terrain." },
+            { "id": "wf_04", "name": "Direct vs. Indirect Attack Tactics", "standard": "NFPA 1051", "description": "Execute direct flame attack or indirect burnout operations based on fire behavior." },
+            { "id": "wf_05", "name": "Drip Torch Operation & Ignition Patterns", "standard": "NFPA 1051", "description": "Apply controlled backing or strip fires safely using a diesel/gasoline drip torch." },
+            { "id": "wf_06", "name": "Wildland Engine Progressive Hose Lay", "standard": "NFPA 1051", "description": "Lay out staged forestry hose packages from a brush truck into remote treed zones." },
+            { "id": "wf_07", "name": "Structure Protection & WUI Defensible Space Setup", "standard": "NFPA 1144", "description": "Prune ladder fuels, clear pine needles, and set up sprinkler protection around structures." },
+            { "id": "wf_08", "name": "Hotspotting and Mop-Up Operations", "standard": "NFPA 1051", "description": "Extinguish smoldering logs, stumps, and root systems completely using water and dirt mixing." },
+            { "id": "wf_09", "name": "Emergency Fire Shelter Deployment", "standard": "NFPA 1051", "description": "Deploy an emergency fire shelter rapidly in a cleared zone if trapped by a blowup." },
+            { "id": "wf_10", "name": "Aerial Bucket / Helicopter Water Drop Coordination", "standard": "NFPA 1051", "description": "Communicate drop targets clearly with air attack aircraft using air-to-ground radio frequencies." }
+        ],
+        "resources": [
+            "Wildland Nomex PPE & Leather Boots",
+            "Pulaski, McLeod, and Shovel Hand Tools",
+            "Forestry Hose Lay Kit (1-1/2 inch / 1 inch)",
+            "Portable Mark III Wildland Pump",
+            "Emergency Fire Shelters"
+        ]
     }
 }
