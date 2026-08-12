@@ -81,7 +81,7 @@ Incorporate local standards like Alberta OHS if relevant. Output ONLY the number
     } catch (error) {
         console.error(error);
         seqField.value = "1. Briefing and safety check.\n2. Apparatus setup.\n3. Practical rotations.\n4. Hot wash and debrief.";
-        if (outSeq) outSeq.textContent = seqField.value;
+        if (outSeq) outSeq.textContent = objField.value;
     }
 }
 
@@ -174,6 +174,38 @@ const trainingCategories = {
     }
 };
 
+function updateCategoryDetails(selectedKey) {
+    const skillsContainer = document.getElementById('skills-checkbox-container');
+    const equipContainer = document.getElementById('equipment-checkbox-container');
+    
+    if (!skillsContainer || !equipContainer) return;
+
+    skillsContainer.innerHTML = '';
+    equipContainer.innerHTML = '';
+
+    if (trainingCategories[selectedKey]) {
+        const data = trainingCategories[selectedKey];
+
+        // Populate Skills Checkboxes
+        data.skills.forEach((skill) => {
+            const label = document.createElement('label');
+            label.style.display = 'block';
+            label.style.marginBottom = '4px';
+            label.innerHTML = `<input type="checkbox" value="${skill}" checked> ${skill}`;
+            skillsContainer.appendChild(label);
+        });
+
+        // Populate Equipment Checkboxes
+        data.equipment.forEach((eq) => {
+            const label = document.createElement('label');
+            label.style.display = 'block';
+            label.style.marginBottom = '4px';
+            label.innerHTML = `<input type="checkbox" value="${eq}" checked> ${eq}`;
+            equipContainer.appendChild(label);
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('input-category');
     if (!categorySelect) return;
@@ -186,37 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
         categorySelect.appendChild(option);
     }
 
+    // Trigger initial load for the default selected category
+    if (categorySelect.value && trainingCategories[categorySelect.value]) {
+        updateCategoryDetails(categorySelect.value);
+    }
+
     categorySelect.addEventListener('change', (e) => {
-        const selectedKey = e.target.value;
-        const skillsContainer = document.getElementById('skills-checkbox-container');
-        const equipContainer = document.getElementById('equipment-checkbox-container');
-        
-        if (!skillsContainer || !equipContainer) return;
-
-        skillsContainer.innerHTML = '';
-        equipContainer.innerHTML = '';
-
-        if (trainingCategories[selectedKey]) {
-            const data = trainingCategories[selectedKey];
-
-            // Populate Skills Checkboxes
-            data.skills.forEach((skill, idx) => {
-                const label = document.createElement('label');
-                label.style.display = 'block';
-                label.style.marginBottom = '4px';
-                label.innerHTML = `<input type="checkbox" value="${skill}" checked> ${skill}`;
-                skillsContainer.appendChild(label);
-            });
-
-            // Populate Equipment Checkboxes
-            data.equipment.forEach((eq, idx) => {
-                const label = document.createElement('label');
-                label.style.display = 'block';
-                label.style.marginBottom = '4px';
-                label.innerHTML = `<input type="checkbox" value="${eq}" checked> ${eq}`;
-                equipContainer.appendChild(label);
-            });
-        }
+        updateCategoryDetails(e.target.value);
     });
 
     // Real-time live preview text bindings
