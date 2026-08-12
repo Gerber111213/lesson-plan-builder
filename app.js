@@ -99,8 +99,12 @@ function exportPDF() {
         margin:       0.3,
         filename:     'Training-Plan.pdf',
         image:        { type: 'jpeg', quality: 0.95 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
-    html2pdf().from(element).set(opt).save();
+
+    // Tiny delay ensures text and checkboxes are fully painted before capture
+    setTimeout(() => {
+        html2pdf().from(element).set(opt).save();
+    }, 250);
 }
