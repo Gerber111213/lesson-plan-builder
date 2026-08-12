@@ -154,3 +154,17 @@ button {
     body { background: none; padding: 0; }
     .lesson-plan-sheet { box-shadow: none; width: 100%; padding: 0; }
 }
+/* Add to the bottom of style.css */
+.page-break {
+    display: block;
+    page-break-before: always;
+    break-before: page;
+    margin-top: 30px;
+}
+
+@media print {
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+    }
+}
