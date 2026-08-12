@@ -41,7 +41,7 @@ function loadCategoryData() {
     const category = standardsData[catKey];
 
     // Populate Skills checkboxes
-    category.skills.forEach((skill, index) => {
+    category.skills.forEach((skill) => {
         const div = document.createElement('div');
         div.className = 'checkbox-item';
         div.innerHTML = `
@@ -54,7 +54,7 @@ function loadCategoryData() {
     });
 
     // Populate Resources checkboxes
-    category.resources.forEach((res, index) => {
+    category.resources.forEach((res) => {
         const div = document.createElement('div');
         div.className = 'checkbox-item';
         div.innerHTML = `
@@ -66,30 +66,25 @@ function loadCategoryData() {
         resContainer.appendChild(div);
     });
 
-    // Auto-populate safety overview if available
-    let autoSafety = category.skills.map(s => `• ${s.name}: ${s.description}`).join('\n');
+    // Auto-populate safety overview
+    let autoSafety = category.defaultSafety || category.skills.map(s => `• ${s.name}: ${s.description}`).join('\n');
     document.getElementById('input-safety').value = autoSafety;
     document.getElementById('output-safety').textContent = autoSafety;
 }
 
 // Compile checked items into the preview sheet
 function updateSelections() {
-    // Gather checked skills
     const selectedSkills = [];
     document.querySelectorAll('#skills-checkbox-container input[type="checkbox"]:checked').forEach(cb => {
         selectedSkills.push(`• ${cb.value}`);
     });
-    const skillsText = selectedSkills.join('\n');
-    document.getElementById('output-skills-list').textContent = skillsText || '--';
+    document.getElementById('output-skills-list').textContent = selectedSkills.join('\n') || '--';
 
-    // Gather checked resources
     const selectedRes = [];
     document.querySelectorAll('#resources-checkbox-container input[type="checkbox"]:checked').forEach(cb => {
         selectedRes.push(`• ${cb.value}`);
     });
-    const resText = selectedRes.join('\n');
-    document.getElementById('input-resources-val') || '';
-    document.getElementById('output-resources').textContent = resText || '--';
+    document.getElementById('output-resources').textContent = selectedRes.join('\n') || '--';
 }
 
 // Local Storage Caching
@@ -118,26 +113,23 @@ function loadPlan() {
     }
 }
 
-// PDF Export Trigger (Optimized for full top-to-bottom multi-page capture)
+// PDF Export Trigger (Targeting strictly the printable sheet container)
 function exportPDF() {
     const element = document.getElementById('printable-area');
     
     const opt = {
-        margin:       [0.3, 0.3, 0.3, 0.3],
+        margin:       [0.4, 0.4, 0.4, 0.4],
         filename:     'Fire-Training-Lesson-Plan.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { 
             scale: 2, 
             useCORS: true, 
             logging: false,
-            letterRendering: true,
-            windowWidth: element.scrollWidth 
+            letterRendering: true 
         },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
         pagebreak:    { mode: ['css', 'legacy'] }
     };
 
-    setTimeout(() => {
-        html2pdf().from(element).set(opt).save();
-    }, 200);
+    html2pdf().from(element).set(opt).save();
 }
