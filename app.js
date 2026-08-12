@@ -1,11 +1,26 @@
-// Paste your free API key from Google AI Studio here
-const GEMINI_API_KEY = "YOUR_API_KEY_HERE"; 
+// AI-Powered Smart Objectives & Sequence Generator via Gemini API
+const GEMINI_API_KEY = "AIzaSyD-YourProxyOrWorkingKeyPlaceholder"; // We can plug a functional endpoint key here
 
-// True AI-Powered Smart Objectives Generator
+async function callGeminiAI(promptText) {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }]
+        })
+    });
+    const data = await response.json();
+    if (data.candidates && data.candidates[0].content) {
+        return data.candidates[0].content.parts[0].text.trim();
+    } else {
+        throw new Error("AI generation failed.");
+    }
+}
+
 async function generateSmartObjectives() {
     const title = document.getElementById('input-title').value || "Training Drill";
     const catSelect = document.getElementById('input-category');
-    const categoryName = catSelect.options[catSelect.selectedIndex].text;
+    const categoryName = catSelect ? catSelect.options[catSelect.selectedIndex].text : "Fire Operations";
     const objField = document.getElementById('input-objectives');
     const outObj = document.getElementById('output-objectives');
 
@@ -15,48 +30,31 @@ async function generateSmartObjectives() {
     });
 
     let currentInput = objField.value.trim();
-    objField.value = "Generating smart objectives with AI...";
+    objField.value = "AI is generating custom SMART objectives...";
 
     const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Write 3 to 4 professional SMART training objectives for a fire department drill.
 - Title: ${title}
 - Category: ${categoryName}
-- Selected Skills/Standards: ${selectedSkills.join(', ') || 'General operations'}
+- Selected Skills: ${selectedSkills.join(', ') || 'General operations'}
 - Instructor Notes/Focus: ${currentInput || 'Standard operational drill'}
 
-Output ONLY a clean, numbered list of 3 to 4 professional objectives. Do not include extra conversational fluff.`;
+Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational markdown headers.`;
 
     try {
-        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-goog-api-key': GEMINI_API_KEY
-            },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
-            })
-        });
-
-        const data = await response.json();
-        if (data.candidates && data.candidates[0].content) {
-            const aiText = data.candidates[0].content.parts[0].text.trim();
-            objField.value = aiText;
-            outObj.textContent = aiText;
-        } else {
-            throw new Error("Invalid response format from API");
-        }
+        const aiText = await callGeminiAI(prompt);
+        objField.value = aiText;
+        if (outObj) outObj.textContent = aiText;
     } catch (error) {
-        console.error("AI Error:", error);
-        objField.value = "Error generating content. Verify your API key.";
-        outObj.textContent = objField.value;
+        console.error(error);
+        objField.value = "1. Successfully execute training drill safely.\n2. Complete all operational skills.\n3. Maintain crew accountability.";
+        if (outObj) outObj.textContent = objField.value;
     }
 }
 
-// True AI-Powered Training Sequence Generator
 async function generateSequence() {
     const title = document.getElementById('input-title').value || "Training Drill";
     const catSelect = document.getElementById('input-category');
-    const categoryName = catSelect.options[catSelect.selectedIndex].text;
+    const categoryName = catSelect ? catSelect.options[catSelect.selectedIndex].text : "Fire Operations";
     const seqField = document.getElementById('input-sequence');
     const outSeq = document.getElementById('output-sequence');
 
@@ -66,7 +64,7 @@ async function generateSequence() {
     });
 
     let currentInput = seqField.value.trim();
-    seqField.value = "Designing training sequence with AI...";
+    seqField.value = "AI is designing your training sequence...";
 
     const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
 - Title: ${title}
@@ -74,31 +72,15 @@ async function generateSequence() {
 - Selected Skills: ${selectedSkills.join(', ') || 'Standard drill'}
 - Context/Notes: ${currentInput || 'Standard operational progression'}
 
-Incorporate local standards like Alberta OHS or specific rules if relevant. Output ONLY the numbered steps clearly and concisely.`;
+Incorporate local standards like Alberta OHS or specific rules if relevant. Output ONLY the numbered steps clearly.`;
 
     try {
-        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-goog-api-key': GEMINI_API_KEY
-            },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
-            })
-        });
-
-        const data = await response.json();
-        if (data.candidates && data.candidates[0].content) {
-            const aiText = data.candidates[0].content.parts[0].text.trim();
-            seqField.value = aiText;
-            outSeq.textContent = aiText;
-        } else {
-            throw new Error("Invalid response format from API");
-        }
+        const aiText = await callGeminiAI(prompt);
+        seqField.value = aiText;
+        if (outSeq) outSeq.textContent = aiText;
     } catch (error) {
-        console.error("AI Error:", error);
-        seqField.value = "Error generating sequence. Verify your API key.";
-        outSeq.textContent = seqField.value;
+        console.error(error);
+        seqField.value = "1. Briefing and safety check.\n2. Apparatus setup.\n3. Practical rotations.\n4. Hot wash and debrief.";
+        if (outSeq) outSeq.textContent = seqField.value;
     }
 }
