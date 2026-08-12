@@ -25,13 +25,13 @@ async function generateSmartObjectives() {
     objField.value = "AI is generating custom SMART objectives...";
 
     const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Write 3 to 4 professional SMART training objectives for a fire department drill.
-CRITICAL INSTRUCTION: You must strictly base the objectives on the instructor's custom focus notes provided below. Do not use generic filler if specific notes are given.
+CRITICAL INSTRUCTION: You must base these objectives directly and specifically on the instructor notes provided below. Do not output generic boilerplate objectives.
 - Title: ${title}
 - Category: ${categoryName}
 - Selected Skills: ${selectedSkills.join(', ') || 'General operations'}
-- Instructor Focus / Notes: ${currentInput || 'Standard operational drill'}
+- Instructor Notes / Focus: ${currentInput || 'None provided. Focus strictly on custom tactical execution of the selected category.'}
 
-Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational text or markdown headers.`;
+Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational markdown headers or extra text.`;
 
     try {
         const aiText = await callPublicAI(prompt);
@@ -60,11 +60,11 @@ async function generateSequence() {
     seqField.value = "AI is designing your training sequence...";
 
     const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
-CRITICAL INSTRUCTION: You must strictly base the sequence on the context and focus notes provided below.
+CRITICAL INSTRUCTION: You must build this step-by-step progression specifically around the context and focus notes provided by the instructor below.
 - Title: ${title}
 - Category: ${categoryName}
 - Selected Skills: ${selectedSkills.join(', ') || 'Standard drill'}
-- Context / Instructor Notes: ${currentInput || 'Standard operational progression'}
+- Context / Instructor Notes: ${currentInput || 'None provided. Create a logical standard operational progression.'}
 
 Incorporate local standards like Alberta OHS if relevant. Output ONLY the numbered steps clearly. No conversational text.`;
 
@@ -79,10 +79,7 @@ Incorporate local standards like Alberta OHS if relevant. Output ONLY the number
     }
 }
 
-function loadCategoryData() {
-    const categorySelect = document.getElementById('input-category');
-    const selectedKey = categorySelect.value;
-    
+function updateCategoryDetails(selectedKey) {
     const skillsContainer = document.getElementById('skills-checkbox-container');
     const equipContainer = document.getElementById('equipment-checkbox-container');
     const safetyField = document.getElementById('input-safety');
@@ -169,9 +166,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             option.textContent = cat.categoryName || key;
             categorySelect.appendChild(option);
         }
+
+        if (categorySelect.value && trainingCategories[categorySelect.value]) {
+            updateCategoryDetails(categorySelect.value);
+        }
     } catch (error) {
         console.error("Error loading standards.json database:", error);
     }
+
+    categorySelect.addEventListener('change', (e) => {
+        updateCategoryDetails(e.target.value);
+    });
 
     const bindLivePreview = (inputId, outputId) => {
         const input = document.getElementById(inputId);
