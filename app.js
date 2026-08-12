@@ -75,12 +75,12 @@ function generateSmartObjectives() {
     outObj.textContent = text;
 }
 
-// AI Assist: Generate Structured Training Sequence
+// AI Assist: Generate Structured Training Sequence (No Times)
 function generateSequence() {
     const seqField = document.getElementById('input-sequence');
     const outSeq = document.getElementById('output-sequence');
 
-    let text = "1. 0800 - 0815: Classroom briefing, hazard identification, and safety protocol review.\n2. 0815 - 0830: Apparatus setup, tool inspection, and personal protective equipment (PPE) check.\n3. 0830 - 0945: Hands-on practical station rotations and controlled skill execution.\n4. 0945 - 1000: Debrief, equipment recovery, site cleanup, and instructor review.";
+    let text = "1. Classroom briefing, hazard identification, and safety protocol review.\n2. Apparatus positioning, tool inspection, and personal protective equipment (PPE) check.\n3. Hands-on practical station rotations and controlled traffic safety skill execution.\n4. Tactical debrief, equipment recovery, site cleanup, and instructor review.";
 
     seqField.value = text;
     outSeq.textContent = text;
