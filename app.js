@@ -1,20 +1,20 @@
-// AI-Powered Smart Objectives & Sequence Generator via Gemini API
-const GEMINI_API_KEY = "AIzaSyD-YourProxyOrWorkingKeyPlaceholder"; // We can plug a functional endpoint key here
-
-async function callGeminiAI(promptText) {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+// Zero-Key Free Public AI Gateway for Smart Objectives & Sequence Generator
+async function callPublicAI(promptText) {
+    const response = await fetch("https://text.pollinations.ai/", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            contents: [{ parts: [{ text: promptText }] }]
+            messages: [
+                { role: "system", content: "You are a master fire service instructor in Red Deer County, Alberta. Write concise, professional, operationally accurate fire training content." },
+                { role: "user", content: promptText }
+            ],
+            model: "openai",
+            json: false
         })
     });
-    const data = await response.json();
-    if (data.candidates && data.candidates[0].content) {
-        return data.candidates[0].content.parts[0].text.trim();
-    } else {
-        throw new Error("AI generation failed.");
-    }
+    
+    if (!response.ok) throw new Error("Public AI gateway failed.");
+    return await response.text();
 }
 
 async function generateSmartObjectives() {
@@ -32,18 +32,18 @@ async function generateSmartObjectives() {
     let currentInput = objField.value.trim();
     objField.value = "AI is generating custom SMART objectives...";
 
-    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Write 3 to 4 professional SMART training objectives for a fire department drill.
+    const prompt = `Write 3 to 4 professional SMART training objectives for a fire department drill.
 - Title: ${title}
 - Category: ${categoryName}
 - Selected Skills: ${selectedSkills.join(', ') || 'General operations'}
 - Instructor Notes/Focus: ${currentInput || 'Standard operational drill'}
 
-Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational markdown headers.`;
+Output ONLY a clean, numbered list of 3 to 4 professional objectives. No markdown headers.`;
 
     try {
-        const aiText = await callGeminiAI(prompt);
-        objField.value = aiText;
-        if (outObj) outObj.textContent = aiText;
+        const aiText = await callPublicAI(prompt);
+        objField.value = aiText.trim();
+        if (outObj) outObj.textContent = aiText.trim();
     } catch (error) {
         console.error(error);
         objField.value = "1. Successfully execute training drill safely.\n2. Complete all operational skills.\n3. Maintain crew accountability.";
@@ -66,18 +66,18 @@ async function generateSequence() {
     let currentInput = seqField.value.trim();
     seqField.value = "AI is designing your training sequence...";
 
-    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
+    const prompt = `Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
 - Title: ${title}
 - Category: ${categoryName}
 - Selected Skills: ${selectedSkills.join(', ') || 'Standard drill'}
 - Context/Notes: ${currentInput || 'Standard operational progression'}
 
-Incorporate local standards like Alberta OHS or specific rules if relevant. Output ONLY the numbered steps clearly.`;
+Incorporate local standards like Alberta OHS if relevant. Output ONLY the numbered steps clearly.`;
 
     try {
-        const aiText = await callGeminiAI(prompt);
-        seqField.value = aiText;
-        if (outSeq) outSeq.textContent = aiText;
+        const aiText = await callPublicAI(prompt);
+        seqField.value = aiText.trim();
+        if (outSeq) outSeq.textContent = aiText.trim();
     } catch (error) {
         console.error(error);
         seqField.value = "1. Briefing and safety check.\n2. Apparatus setup.\n3. Practical rotations.\n4. Hot wash and debrief.";
