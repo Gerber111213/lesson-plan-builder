@@ -1,5 +1,4 @@
 let trainingCategories = {};
-
 const GROQ_MODEL = "llama-3.3-70b-versatile";
 
 // Securely gets or prompts for the Groq API key using browser storage
@@ -104,6 +103,53 @@ Incorporate Alberta OHS standards where applicable. Return ONLY 4 clear numbered
         console.error(error);
         seqField.value = "Error connecting to AI. Please check your API key.";
         if (outSeq) outSeq.textContent = objField.value;
+    }
+}
+
+async function generateStation(stationNum) {
+    const title = document.getElementById('input-title').value || "Training Drill";
+    const catSelect = document.getElementById('input-category');
+    const categoryName = catSelect && catSelect.selectedIndex > 0 ? catSelect.options[catSelect.selectedIndex].text : "Fire Operations";
+    const stationField = document.getElementById(`input-station${stationNum}`);
+
+    let currentInput = stationField.value.trim();
+    stationField.value = "AI is designing station rotation...";
+
+    const prompt = `Act as an expert Red Deer County fire instructor. Provide a concise, clear title and short focus description for Training Station ${stationNum} for the drill titled "${title}" under category "${categoryName}". 
+Custom Focus: "${currentInput || 'Standard practical skill rotation'}".
+Return ONLY the station description in 1-2 sentences. No conversational filler.`;
+
+    try {
+        const aiText = await callGroqAI(prompt);
+        stationField.value = aiText.trim();
+    } catch (error) {
+        console.error(error);
+        stationField.value = "Error connecting to AI.";
+    }
+}
+
+async function generateSafety() {
+    const title = document.getElementById('input-title').value || "Training Drill";
+    const catSelect = document.getElementById('input-category');
+    const categoryName = catSelect && catSelect.selectedIndex > 0 ? catSelect.options[catSelect.selectedIndex].text : "Fire Operations";
+    const safetyField = document.getElementById('input-safety');
+    const outSafety = document.getElementById('output-safety');
+
+    let currentInput = safetyField.value.trim();
+    safetyField.value = "AI is analyzing safety controls and hazards...";
+
+    const prompt = `Act as an expert Red Deer County fire safety officer. Write comprehensive safety controls, personal protective equipment (PPE) requirements, and hazard mitigations adhering to Alberta OHS standards for the drill "${title}" under category "${categoryName}".
+Instructor Context: "${currentInput || 'Standard operational safety'}".
+Return a concise, professional paragraph of safety controls. No conversational text.`;
+
+    try {
+        const aiText = await callGroqAI(prompt);
+        safetyField.value = aiText.trim();
+        if (outSafety) outSafety.textContent = aiText.trim();
+    } catch (error) {
+        console.error(error);
+        safetyField.value = "Error connecting to AI.";
+        if (outSafety) outSafety.textContent = safetyField.value;
     }
 }
 
