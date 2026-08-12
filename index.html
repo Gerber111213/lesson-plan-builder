@@ -1,214 +1,176 @@
-let trainingCategories = {};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Training Lesson Plan Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// Reliable Zero-Key Free AI Gateway
-async function callPublicAI(promptText) {
-    const encodedPrompt = encodeURIComponent(promptText);
-    const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai&private=true`);
-    
-    if (!response.ok) throw new Error("Public AI gateway failed.");
-    return await response.text();
-}
+    <!-- CONTROL PANEL -->
+    <div class="control-panel no-print">
+        <h2>Training Plan Builder</h2>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label>Training Title</label>
+                <input type="text" id="input-title" placeholder="Enter title...">
+            </div>
+            
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="input-date">
+            </div>
 
-async function generateSmartObjectives() {
-    const title = document.getElementById('input-title').value || "Training Drill";
-    const catSelect = document.getElementById('input-category');
-    const categoryName = catSelect && catSelect.selectedIndex > 0 ? catSelect.options[catSelect.selectedIndex].text : "Fire Operations";
-    const objField = document.getElementById('input-objectives');
-    const outObj = document.getElementById('output-objectives');
+            <div class="form-group">
+                <label>Category (NFPA / JPR)</label>
+                <select id="input-category" onchange="loadCategoryData()">
+                    <option value="">-- Select Category --</option>
+                </select>
+            </div>
 
-    const selectedSkills = [];
-    document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
-        selectedSkills.push(cb.value);
-    });
+            <div class="form-group full-width">
+                <label>Skills & Standards</label>
+                <div id="skills-checkbox-container" class="checkbox-grid">
+                    <span style="color:#778588; font-size:0.8rem; padding:4px;">Select a category above first.</span>
+                </div>
+            </div>
 
-    let currentInput = objField.value.trim();
-    objField.value = "AI is generating custom SMART objectives...";
+            <div class="form-group full-width">
+                <label>Equipment & Resources</label>
+                <div id="resources-checkbox-container" class="checkbox-grid">
+                    <span style="color:#778588; font-size:0.8rem; padding:4px;">Select a category above first.</span>
+                </div>
+            </div>
 
-    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Write 3 to 4 professional SMART training objectives for a fire department drill.
-- Title: ${title}
-- Category: ${categoryName}
-- Selected Skills: ${selectedSkills.join(', ') || 'General operations'}
-- Instructor Notes/Focus: ${currentInput || 'Standard operational drill'}
+            <div class="form-group full-width">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin-bottom:0;">Core Objectives (SMART)</label>
+                    <button type="button" onclick="generateSmartObjectives()" style="padding: 2px 8px; font-size: 0.75rem; background: #c91c1c; color:#fff; border-radius:3px;">✨ AI Assist</button>
+                </div>
+                <textarea id="input-objectives"></textarea>
+            </div>
 
-Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational markdown headers.`;
+            <div class="form-group full-width">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin-bottom:0;">Training Sequence / Evolutions</label>
+                    <button type="button" onclick="generateSequence()" style="padding: 2px 8px; font-size: 0.75rem; background: #c91c1c; color:#fff; border-radius:3px;">✨ AI Assist</button>
+                </div>
+                <textarea id="input-sequence"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Station 1</label>
+                <input type="text" id="input-station1">
+            </div>
+            <div class="form-group">
+                <label>Station 2</label>
+                <input type="text" id="input-station2">
+            </div>
+            <div class="form-group">
+                <label>Station 3</label>
+                <input type="text" id="input-station3">
+            </div>
 
-    try {
-        const aiText = await callPublicAI(prompt);
-        objField.value = aiText.trim();
-        if (outObj) outObj.textContent = aiText.trim();
-    } catch (error) {
-        console.error(error);
-        objField.value = "1. Successfully execute training drill safely.\n2. Complete all operational skills.\n3. Maintain crew accountability.";
-        if (outObj) outObj.textContent = objField.value;
-    }
-}
+            <div class="form-group full-width">
+                <label>Safety Controls & Hazards</label>
+                <textarea id="input-safety"></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label>Instructor Notes</label>
+                <textarea id="input-notes"></textarea>
+            </div>
+        </div>
 
-async function generateSequence() {
-    const title = document.getElementById('input-title').value || "Training Drill";
-    const catSelect = document.getElementById('input-category');
-    const categoryName = catSelect && catSelect.selectedIndex > 0 ? catSelect.options[catSelect.selectedIndex].text : "Fire Operations";
-    const seqField = document.getElementById('input-sequence');
-    const outSeq = document.getElementById('output-sequence');
+        <div class="action-buttons">
+            <button class="btn-primary" onclick="savePlan()">Save</button>
+            <button class="btn-secondary" onclick="loadPlan()">Load</button>
+            <button class="btn-print" onclick="exportPDF()">Export PDF</button>
+        </div>
+    </div>
 
-    const selectedSkills = [];
-    document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
-        selectedSkills.push(cb.value);
-    });
+    <!-- PRINTABLE SHEET -->
+    <div id="printable-area" class="lesson-plan-sheet">
+        
+        <!-- PAGE 1: EXCLUSIVE SAFETY BRIEFING & SIGN-OFF -->
+        <header class="plan-header">
+            <h1>RED DEER COUNTY FIRE & RESCUE</h1>
+            <h2>Mandatory Safety Briefing & Roster Sign-Off</h2>
+        </header>
 
-    let currentInput = seqField.value.trim();
-    seqField.value = "AI is designing your training sequence...";
+        <div class="content-section">
+            <h3>Training Details</h3>
+            <div class="box-content"><strong>Title:</strong> <span id="output-title">--</span> | <strong>Date:</strong> <span id="output-date">--</span></div>
+        </div>
 
-    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
-- Title: ${title}
-- Category: ${categoryName}
-- Selected Skills: ${selectedSkills.join(', ') || 'Standard drill'}
-- Context/Notes: ${currentInput || 'Standard operational progression'}
+        <div class="content-section" style="margin-top: 20px;">
+            <h3>Operational Safety Guidelines & Risk Assessment</h3>
+            <div class="box-content" id="output-safety" style="min-height: 120px; font-size: 1rem; line-height: 1.5;">--</div>
+        </div>
 
-Incorporate local standards like Alberta OHS if relevant. Output ONLY the numbered steps clearly.`;
+        <div class="content-section" style="margin-top: 30px; border: 2px dashed #2b2b2b; padding: 20px; text-align: center; background: #f9f9f9;">
+            <h3 style="background: none; color: #2b2b2b; font-size: 1rem; margin-bottom: 10px;">MEMBER SAFETY ACKNOWLEDGEMENT</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 15px; color: #555;">By signing below or scanning the QR code, members acknowledge they have read, understood, and agreed to abide by the safety controls and standard operating guidelines outlined for this evolution.</p>
+            
+            <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+                <div style="border: 1px solid #ccc; background: #fff; padding: 10px; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <div style="font-size: 0.75rem; font-weight: bold; color: #333; margin-bottom: 5px;">SCAN TO SIGN</div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://gerber111213.github.io/lesson-plan-builder/" alt="Sign-off QR Code" style="width: 100px; height: 100px;">
+                </div>
+                <div style="text-align: left; width: 55%; font-size: 0.85rem;">
+                    <p><strong>Crew Sign-Off Roster:</strong></p>
+                    <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">1. Printed Name: _____________________ Sig: ___________</div>
+                    <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">2. Printed Name: _____________________ Sig: ___________</div>
+                    <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">3. Printed Name: _____________________ Sig: ___________</div>
+                </div>
+            </div>
+        </div>
 
-    try {
-        const aiText = await callPublicAI(prompt);
-        seqField.value = aiText.trim();
-        if (outSeq) outSeq.textContent = aiText.trim();
-    } catch (error) {
-        console.error(error);
-        seqField.value = "1. Briefing and safety check.\n2. Apparatus setup.\n3. Practical rotations.\n4. Hot wash and debrief.";
-        if (outSeq) outSeq.textContent = seqField.value;
-    }
-}
+        <div class="page-break"></div>
 
-// Matches HTML onchange="loadCategoryData()"
-function loadCategoryData() {
-    const categorySelect = document.getElementById('input-category');
-    const selectedKey = categorySelect.value;
-    
-    const skillsContainer = document.getElementById('skills-checkbox-container');
-    const equipContainer = document.getElementById('resources-checkbox-container');
-    const safetyField = document.getElementById('input-safety');
-    const outSkillsList = document.getElementById('output-skills-list');
-    const outResources = document.getElementById('output-resources');
-    
-    if (!skillsContainer || !equipContainer) return;
+        <!-- PAGE 2: LESSON PLAN & EVOLUTIONS DOCUMENT -->
+        <header class="plan-header">
+            <h1>RED DEER COUNTY FIRE & RESCUE</h1>
+            <h2>Training Lesson Plan & Evolutions</h2>
+        </header>
 
-    skillsContainer.innerHTML = '';
-    equipContainer.innerHTML = '';
+        <div class="grid-2col">
+            <div class="content-section">
+                <h3>Core Objectives (SMART)</h3>
+                <div class="box-content" id="output-objectives">--</div>
+            </div>
+            <div class="content-section">
+                <h3>Skills & Standards Highlighted</h3>
+                <div class="box-content" id="output-skills-list">--</div>
+            </div>
+        </div>
 
-    if (trainingCategories[selectedKey]) {
-        const data = trainingCategories[selectedKey];
+        <div class="content-section">
+            <h3>Resources & Equipment</h3>
+            <div class="box-content" id="output-resources">--</div>
+        </div>
 
-        // Populate default safety text
-        if (safetyField && data.defaultSafety) {
-            safetyField.value = data.defaultSafety;
-            const outSafety = document.getElementById('output-safety');
-            if (outSafety) outSafety.textContent = data.defaultSafety;
-        }
+        <div class="content-section">
+            <h3>Training Sequence / Evolutions</h3>
+            <div class="box-content" id="output-sequence">--</div>
+        </div>
 
-        // Populate Skills Checkboxes
-        let skillNames = [];
-        if (data.skills) {
-            data.skills.forEach((skillObj) => {
-                const skillName = skillObj.name || skillObj;
-                skillNames.push(skillName);
-                
-                const label = document.createElement('label');
-                label.style.display = 'block';
-                label.style.marginBottom = '4px';
-                label.innerHTML = `<input type="checkbox" value="${skillName}" checked onchange="updatePrintSummary()"> ${skillName}`;
-                skillsContainer.appendChild(label);
-            });
-        }
+        <div class="content-section">
+            <h3>Group / Station Assignments</h3>
+            <div class="stations-grid">
+                <div class="station-box"><strong>Station 1:</strong> <span id="output-station1">--</span></div>
+                <div class="station-box"><strong>Station 2:</strong> <span id="output-station2">--</span></div>
+                <div class="station-box"><strong>Station 3:</strong> <span id="output-station3">--</span></div>
+            </div>
+        </div>
 
-        // Populate Equipment / Resources Checkboxes
-        if (data.resources) {
-            data.resources.forEach((eq) => {
-                const label = document.createElement('label');
-                label.style.display = 'block';
-                label.style.marginBottom = '4px';
-                label.innerHTML = `<input type="checkbox" value="${eq}" checked onchange="updatePrintSummary()"> ${eq}`;
-                equipContainer.appendChild(label);
-            });
-        }
+        <div class="content-section">
+            <h3>Instructor Notes</h3>
+            <div class="box-content" id="output-notes">--</div>
+        </div>
+    </div>
 
-        updatePrintSummary();
-    } else {
-        skillsContainer.innerHTML = '<span style="color:#778588; font-size:0.8rem; padding:4px;">Select a category above first.</span>';
-        equipContainer.innerHTML = '<span style="color:#778588; font-size:0.8rem; padding:4px;">Select a category above first.</span>';
-        if (outSkillsList) outSkillsList.textContent = '--';
-        if (outResources) outResources.textContent = '--';
-    }
-}
-
-function updatePrintSummary() {
-    const checkedSkills = [];
-    document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
-        checkedSkills.push(cb.value);
-    });
-
-    const checkedResources = [];
-    document.querySelectorAll('#resources-checkbox-container input:checked').forEach(cb => {
-        checkedResources.push(cb.value);
-    });
-
-    const outSkillsList = document.getElementById('output-skills-list');
-    const outResources = document.getElementById('output-resources');
-
-    if (outSkillsList) {
-        outSkillsList.innerHTML = checkedSkills.length > 0 ? checkedSkills.map(s => `• ${s}`).join('<br>') : '--';
-    }
-    if (outResources) {
-        outResources.innerHTML = checkedResources.length > 0 ? checkedResources.map(r => `• ${r}`).join('<br>') : '--';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const categorySelect = document.getElementById('input-category');
-    if (!categorySelect) return;
-
-    // Fetch standards.json dynamically
-    try {
-        const response = await fetch('standards.json');
-        trainingCategories = await response.json();
-
-        for (const [key, cat] of Object.entries(trainingCategories)) {
-            const option = document.createElement('option');
-            option.value = key;
-            option.textContent = cat.categoryName || key;
-            categorySelect.appendChild(option);
-        }
-    } catch (error) {
-        console.error("Error loading standards.json database:", error);
-    }
-
-    const bindLivePreview = (inputId, outputId) => {
-        const input = document.getElementById(inputId);
-        const output = document.getElementById(outputId);
-        if (input && output) {
-            input.addEventListener('input', () => {
-                output.textContent = input.value || '--';
-            });
-        }
-    };
-
-    bindLivePreview('input-title', 'output-title');
-    bindLivePreview('input-date', 'output-date');
-    bindLivePreview('input-objectives', 'output-objectives');
-    bindLivePreview('input-sequence', 'output-sequence');
-    bindLivePreview('input-station1', 'output-station1');
-    bindLivePreview('input-station2', 'output-station2');
-    bindLivePreview('input-station3', 'output-station3');
-    bindLivePreview('input-safety', 'output-safety');
-    bindLivePreview('input-notes', 'output-notes');
-});
-
-// Save / Load / PDF stubs if not defined elsewhere
-function savePlan() {
-    alert("Lesson plan data saved locally!");
-}
-
-function loadPlan() {
-    alert("Load feature active.");
-}
-
-function exportPDF() {
-    window.print();
-}
+    <!-- JavaScript linked properly -->
+    <script src="app.js"></script>
+</body>
+</html>
