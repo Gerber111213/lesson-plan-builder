@@ -1,17 +1,7 @@
-// Zero-Key Free Public AI Gateway for Smart Objectives & Sequence Generator
+// Reliable Zero-Key Free AI via Pollinations Text GET Endpoint
 async function callPublicAI(promptText) {
-    const response = await fetch("https://text.pollinations.ai/", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            messages: [
-                { role: "system", content: "You are a master fire service instructor in Red Deer County, Alberta. Write concise, professional, operationally accurate fire training content." },
-                { role: "user", content: promptText }
-            ],
-            model: "openai",
-            json: false
-        })
-    });
+    const encodedPrompt = encodeURIComponent(promptText);
+    const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai&private=true`);
     
     if (!response.ok) throw new Error("Public AI gateway failed.");
     return await response.text();
@@ -32,13 +22,13 @@ async function generateSmartObjectives() {
     let currentInput = objField.value.trim();
     objField.value = "AI is generating custom SMART objectives...";
 
-    const prompt = `Write 3 to 4 professional SMART training objectives for a fire department drill.
+    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Write 3 to 4 professional SMART training objectives for a fire department drill.
 - Title: ${title}
 - Category: ${categoryName}
 - Selected Skills: ${selectedSkills.join(', ') || 'General operations'}
 - Instructor Notes/Focus: ${currentInput || 'Standard operational drill'}
 
-Output ONLY a clean, numbered list of 3 to 4 professional objectives. No markdown headers.`;
+Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational markdown headers.`;
 
     try {
         const aiText = await callPublicAI(prompt);
@@ -66,7 +56,7 @@ async function generateSequence() {
     let currentInput = seqField.value.trim();
     seqField.value = "AI is designing your training sequence...";
 
-    const prompt = `Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
+    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
 - Title: ${title}
 - Category: ${categoryName}
 - Selected Skills: ${selectedSkills.join(', ') || 'Standard drill'}
@@ -186,7 +176,6 @@ function updateCategoryDetails(selectedKey) {
     if (trainingCategories[selectedKey]) {
         const data = trainingCategories[selectedKey];
 
-        // Populate Skills Checkboxes
         data.skills.forEach((skill) => {
             const label = document.createElement('label');
             label.style.display = 'block';
@@ -195,7 +184,6 @@ function updateCategoryDetails(selectedKey) {
             skillsContainer.appendChild(label);
         });
 
-        // Populate Equipment Checkboxes
         data.equipment.forEach((eq) => {
             const label = document.createElement('label');
             label.style.display = 'block';
@@ -210,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('input-category');
     if (!categorySelect) return;
 
-    // Populate Category Dropdown
     for (const [key, cat] of Object.entries(trainingCategories)) {
         const option = document.createElement('option');
         option.value = key;
@@ -218,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
         categorySelect.appendChild(option);
     }
 
-    // Trigger initial load for the default selected category
     if (categorySelect.value && trainingCategories[categorySelect.value]) {
         updateCategoryDetails(categorySelect.value);
     }
@@ -227,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCategoryDetails(e.target.value);
     });
 
-    // Real-time live preview text bindings
     const bindLivePreview = (inputId, outputId) => {
         const input = document.getElementById(inputId);
         const output = document.getElementById(outputId);
