@@ -5,49 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Training Lesson Plan Generator</title>
     <link rel="stylesheet" href="style.css">
-    <!-- html2pdf library for clean PDF exporting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <!-- CONTROL PANEL (Form Inputs & Cache Actions) -->
     <div class="control-panel no-print">
         <h2>Training Plan Builder</h2>
-        <p>Fill out the fields below, customize your plan, and export or save.</p>
+        <p>Select your operational category to auto-populate standardized skills, equipment, objectives, and safety protocols.</p>
         
         <div class="form-grid">
-            <div class="form-group">
+            <div class="form-group full-width">
                 <label>Training Title</label>
-                <input type="text" id="input-title" placeholder="e.g., Roof Ventilation & Vertical Cut">
+                <input type="text" id="input-title" placeholder="e.g., Highway Incident Traffic Control Drill">
             </div>
+            
             <div class="form-group">
                 <label>Date & Time</label>
                 <input type="date" id="input-date">
             </div>
+
             <div class="form-group">
-                <label>Select NFPA Standard / JPR</label>
-                <select id="input-standards" onchange="loadStandard()">
-                    <option value="">-- Select Standard or JPR --</option>
+                <label>Select Training Category (NFPA / JPR)</label>
+                <select id="input-category" onchange="loadCategoryData()">
+                    <option value="">-- Select Category --</option>
                 </select>
             </div>
-            <div class="form-group full-width">
-                <label>Core Objectives</label>
-                <textarea id="input-objectives" placeholder="List primary learning objectives..."></textarea>
+
+            <!-- Dynamic Skill & Equipment Selectors -->
+            <div class="form-group full-width selector-box">
+                <label>Select Standardized Skills & Standards</label>
+                <div id="skills-checkbox-container" class="checkbox-grid">
+                    <span class="placeholder-text">Please select a category above first.</span>
+                </div>
             </div>
-            <div class="form-group full-width">
-                <label>Skill Highlighted</label>
-                <input type="text" id="input-skill" placeholder="e.g., Chainsaw Operation & Ventilation Sequencing">
+
+            <div class="form-group full-width selector-box">
+                <label>Select Standardized Equipment / Resources</label>
+                <div id="resources-checkbox-container" class="checkbox-grid">
+                    <span class="placeholder-text">Please select a category above first.</span>
+                </div>
             </div>
+
             <div class="form-group full-width">
-                <label>Resources & Equipment Needed</label>
-                <textarea id="input-resources" placeholder="Apparatus, PPE, Saws, Ladders..."></textarea>
+                <label>Core Objectives (Customizable)</label>
+                <textarea id="input-objectives" placeholder="Objectives auto-populate or type custom..."></textarea>
             </div>
+
             <div class="form-group full-width">
                 <label>Training Sequence / Evolutions</label>
-                <textarea id="input-sequence" placeholder="Step 1: Briefing... Step 2: Hands-on..."></textarea>
+                <textarea id="input-sequence" placeholder="Step 1: Briefing... Step 2: Hands-on evolution..."></textarea>
             </div>
             
-            <!-- Stations (1 to 3) -->
             <div class="form-group">
                 <label>Group / Station 1</label>
                 <input type="text" id="input-station1" placeholder="Station leader / Focus">
@@ -63,11 +71,11 @@
 
             <div class="form-group full-width">
                 <label>Safety Controls & Hazards</label>
-                <textarea id="input-safety" placeholder="PPE requirements, collapse zones, rehab protocols..."></textarea>
+                <textarea id="input-safety" placeholder="Safety protocols..."></textarea>
             </div>
             <div class="form-group full-width">
                 <label>Instructor Notes / Reflection</label>
-                <textarea id="input-notes" placeholder="Post-training observations and takeaways..."></textarea>
+                <textarea id="input-notes" placeholder="Post-training notes..."></textarea>
             </div>
         </div>
 
@@ -78,18 +86,15 @@
         </div>
     </div>
 
-<!-- Printable LESSON PLAN DOCUMENT (Target for PDF) -->
-<div id="printable-area" class="lesson-plan-sheet">
-    <!-- Watermark line removed -->
-    
-    <header class="plan-header">
-        <div class="dept-info">
-            <h1>RED DEER COUNTY</h1>
-            <p>PROTECTIVE SERVICES • FIRE & RESCUE</p>
-        </div>
-        <h2>Weekly Fire & Technical Rescue Training Plan</h2>
-    </header>
-...
+    <!-- PRINTABLE LESSON PLAN DOCUMENT -->
+    <div id="printable-area" class="lesson-plan-sheet">
+        <header class="plan-header">
+            <div class="dept-info">
+                <h1>RED DEER COUNTY</h1>
+                <p>PROTECTIVE SERVICES • FIRE & RESCUE</p>
+            </div>
+            <h2>Weekly Fire & Technical Rescue Training Plan</h2>
+        </header>
 
         <section class="meta-block">
             <div class="meta-item"><strong>Training Title:</strong> <span id="output-title">--</span></div>
@@ -99,13 +104,12 @@
         <section class="content-section">
             <h3>1. Safety Briefing & General Hazards</h3>
             <div class="box-content editable" contenteditable="true" id="output-safety">
-                [Auto-populated safety controls and general operational risk assessment will appear here. Instructors can also edit live.]
+                [Safety controls and risk assessments will populate based on category selection.]
             </div>
         </section>
 
         <div class="page-break"></div>
 
-        <!-- Page 2: Lesson Plan Sheet -->
         <div class="plan-header secondary-header">
             <h3>LESSON PLAN & EVOLUTIONS DOCUMENT</h3>
         </div>
@@ -116,13 +120,13 @@
                 <div class="box-content editable" contenteditable="true" id="output-objectives">--</div>
             </div>
             <div class="content-section">
-                <h3>Skill Highlighted</h3>
-                <div class="box-content editable" contenteditable="true" id="output-skill">--</div>
+                <h3>Skills & Standards Highlighted</h3>
+                <div class="box-content editable" contenteditable="true" id="output-skills-list">--</div>
             </div>
         </div>
 
         <div class="content-section">
-            <h3>Resources & Equipment</h3>
+            <h3>Resources & Equipment Required</h3>
             <div class="box-content editable" contenteditable="true" id="output-resources">--</div>
         </div>
 
