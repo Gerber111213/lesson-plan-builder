@@ -2,108 +2,66 @@
     "traffic_management": {
         "categoryName": "Traffic Management & Scene Safety",
         "defaultSafety": "Full structural/high-visibility PPE. Establish positive blocking apparatus positioning and sequential cone tapers prior to commencing work on roadway.",
-        "skills": [],
-        "resources": [
-            "Traffic Cones / Pylons (Min. 6)",
-            "ANSI/CSA Class 3 Safety Vests",
-            "Emergency Flares / LED Triangles",
-            "Air Horn (Emergency warning device)"
-        ]
+        "skills": [
+            { "id": "tm_01", "name": "Apparatus Positioning (Fend-Off Angle)", "standard": "NFPA 1901 / CSA Z1507", "description": "Position apparatus at a 45-degree angle pointing away from the work zone to create a physical traffic barrier." },
+            { "id": "tm_02", "name": "Cone Taper & Buffer Zone Deployment", "standard": "Local JPR TM-04", "description": "Deploy sequential traffic cones to establish an active merge taper and a protected lane buffer." }
+        ],
+        "resources": ["Traffic Cones / Pylons (Min. 6)", "ANSI/CSA Class 3 Safety Vests", "Emergency Flares / LED Triangles", "Air Horn (Emergency warning device)"]
     },
     "forcible_entry": {
         "categoryName": "Forcible Entry Techniques",
         "defaultSafety": "Safety glasses and heavy leather gloves mandatory. Control tool leverage points to prevent slips and clear bystanders from swing radius.",
-        "skills": [],
-        "resources": [
-            "Halligan Bar & Flat-Head Axe ('The Irons')",
-            "K-Tool / Multi-Master Forcible Entry Kit",
-            "Door Control Straps"
-        ]
+        "skills": [
+            { "id": "fe_01", "name": "Inward-Swinging Door Forcing (The Irons)", "standard": "NFPA 1001 (5.3.2)", "description": "Properly gap, set, and force an inward-swinging door using a flat-head axe and Halligan bar." }
+        ],
+        "resources": ["Halligan Bar & Flat-Head Axe ('The Irons')", "K-Tool / Multi-Master Forcible Entry Kit", "Door Control Straps"]
     },
     "vehicle_extrication": {
         "categoryName": "Vehicle Extrication & Stabilization",
-        "defaultSafety": "Full structural PPE with eye protection and heavy rescue gloves. Disconnect 12V/high-voltage power sources, crib vehicle securely before tool operation, and manage airbag deployment zones.",
+        "defaultSafety": "Full structural PPE with eye protection and heavy rescue gloves. Disconnect 12V/high-voltage power sources, crib vehicle securely before tool operation.",
         "skills": [],
-        "resources": [
-            "Hydraulic Spreader, Cutter, and Ram Kit",
-            "Step Chocks & Cribging Blocks",
-            "Glass Management Kit & Protection Tarps",
-            "Battery-Powered Sawzall"
-        ]
+        "resources": ["Hydraulic Spreader, Cutter, and Ram Kit", "Step Chocks & Cribbing Blocks", "Glass Management Kit"]
     },
     "driving": {
         "categoryName": "Apparatus Driving & Emergency Operations",
-        "defaultSafety": "Seatbelts mandatory for all crew members prior to apparatus movement. Comply with local provincial traffic laws and intersection protocols during emergency response modes.",
+        "defaultSafety": "Seatbelts mandatory for all crew members prior to apparatus movement. Comply with local provincial traffic laws.",
         "skills": [],
-        "resources": [
-            "Apparatus Pre-Trip Inspection Sheets",
-            "Spotters / Backing Guide Equipment",
-            "Traffic Cones for Chute / Parking Drills"
-        ]
+        "resources": ["Apparatus Pre-Trip Inspection Sheets", "Spotters / Backing Guide Equipment"]
     },
     "pumping": {
         "categoryName": "Fire Pump Operations & Hydraulics",
-        "defaultSafety": "Wear eye protection and hearing protection when operating high-pressure pump panels. Secure all discharge lines and monitor relief valves/pressure governors.",
+        "defaultSafety": "Wear eye and hearing protection when operating high-pressure pump panels.",
         "skills": [],
-        "resources": [
-            "Engine / Pumper Apparatus",
-            "Hydrant Wrenches & Gate Valves",
-            "Pressure Gauges & Intake Sleeves",
-            "Supply and Attack Hose Lines"
-        ]
+        "resources": ["Engine / Pumper Apparatus", "Hydrant Wrenches & Gate Valves", "Supply and Attack Hose Lines"]
     },
     "interior_operations": {
         "categoryName": "Interior Firefighting Operations",
-        "defaultSafety": "Full structural firefighting PPE with SCBA fully donned and checked prior to entering IDLH atmosphere. Maintain team integrity and monitor air management (PAR checks).",
+        "defaultSafety": "Full structural PPE with SCBA fully donned and checked prior to entering IDLH atmosphere. Maintain team integrity (PAR checks).",
         "skills": [],
-        "resources": [
-            "Full Structural PPE & SCBA with Spare Cylinders",
-            "Thermal Imaging Camera (TIC)",
-            "Attack Line (1.75\" or 2.5\")",
-            "Forcible Entry Irons & Pike Pole"
-        ]
+        "resources": ["Full Structural PPE & SCBA", "Thermal Imaging Camera (TIC)", "Attack Line (1.75\" or 2.5\")"]
     },
     "command_operations": {
         "categoryName": "Incident Command & Scene Management",
-        "defaultSafety": "Establish formal Incident Command Post (ICP) in a safe, visible location outside the immediate hazard zone. Maintain accountability system (tag board/software).",
+        "defaultSafety": "Establish formal Incident Command Post (ICP) in a safe, visible location outside the immediate hazard zone.",
         "skills": [],
-        "resources": [
-            "Incident Command Vest & Worksheet Board",
-            "Portable Radios with Assigned Tactical Channels",
-            "Accountability Tags / Board"
-        ]
+        "resources": ["Incident Command Vest & Worksheet Board", "Portable Radios", "Accountability System"]
     },
     "technical_rescue": {
         "categoryName": "Technical Rescue (Rope, Confined Space, Trench)",
-        "defaultSafety": "Dual-path safety rope systems mandatory for all elevated or below-grade loads. Complete atmospheric monitoring and ventilation for confined spaces.",
+        "defaultSafety": "Dual-path safety rope systems mandatory for all elevated or below-grade loads. Complete atmospheric monitoring.",
         "skills": [],
-        "resources": [
-            "Kernmantle Rescue Ropes & Webbing",
-            "Pulleys, Carabiners, and Anchor Plates",
-            "Tripod / Davit Arm System",
-            "Multi-Gas Atmospheric Monitor"
-        ]
+        "resources": ["Kernmantle Rescue Ropes & Webbing", "Pulleys, Carabiners, and Anchor Plates", "Tripod System"]
     },
     "dangerous_goods": {
         "categoryName": "Dangerous Goods / Hazmat Response",
-        "defaultSafety": "Approach upwind and uphill. Maintain safe isolation distances utilizing the Emergency Response Guidebook (ERG) until chemical identification and monitoring are complete.",
+        "defaultSafety": "Approach upwind and uphill. Maintain safe isolation distances utilizing the Emergency Response Guidebook (ERG).",
         "skills": [],
-        "resources": [
-            "Emergency Response Guidebook (ERG)",
-            "Chemical Protective Suits (Level A/B/C)",
-            "Multi-Gas Detectors & pH Paper",
-            "Absorbent Pads & Containment Dike Material"
-        ]
+        "resources": ["Emergency Response Guidebook (ERG)", "Chemical Protective Suits", "Multi-Gas Detectors"]
     },
     "wildland_fire": {
         "categoryName": "Wildland Fire Suppression & Urban Interface",
-        "defaultSafety": "Wear certified wildland PPE (nomex, boots, helmets, shroud). Identify escape routes and safety zones (LACES protocol) prior to engaging flank or head of fire.",
+        "defaultSafety": "Wear certified wildland PPE (nomex, boots, helmets). Identify escape routes and safety zones (LACES protocol).",
         "skills": [],
-        "resources": [
-            "Wildland Nomex PPE & Fire Shelters",
-            "Pulaski, McLeod, and Drip Torches",
-            "Portable Pump & Progressive Hose Packs",
-            "Wildland Brush Engine / Utility Unit"
-        ]
+        "resources": ["Wildland Nomex PPE & Fire Shelters", "Pulaski, McLeod, and Drip Torches", "Wildland Brush Engine"]
     }
 }
