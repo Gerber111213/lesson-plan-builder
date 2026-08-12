@@ -11,12 +11,13 @@
     <!-- CONTROL PANEL -->
     <div class="control-panel no-print">
         <h2>Training Plan Builder</h2>
+        
         <div class="form-grid">
             <div class="form-group full-width">
                 <label>Training Title</label>
                 <input type="text" id="input-title" placeholder="Enter title...">
             </div>
-            
+
             <div class="form-group">
                 <label>Date</label>
                 <input type="date" id="input-date">
@@ -58,24 +59,30 @@
                 </div>
                 <textarea id="input-sequence"></textarea>
             </div>
-            
+
             <div class="form-group">
-                <label>Station 1</label>
+                <label>Station 1 <button type="button" class="ai-btn" onclick="generateStation(1)" style="padding: 2px 6px; font-size: 0.7rem; background: #c91c1c; color:#fff; border:none; border-radius:3px; cursor:pointer; margin-left:5px;">✨ AI Assist</button></label>
                 <input type="text" id="input-station1">
             </div>
+
             <div class="form-group">
-                <label>Station 2</label>
+                <label>Station 2 <button type="button" class="ai-btn" onclick="generateStation(2)" style="padding: 2px 6px; font-size: 0.7rem; background: #c91c1c; color:#fff; border:none; border-radius:3px; cursor:pointer; margin-left:5px;">✨ AI Assist</button></label>
                 <input type="text" id="input-station2">
             </div>
+
             <div class="form-group">
-                <label>Station 3</label>
+                <label>Station 3 <button type="button" class="ai-btn" onclick="generateStation(3)" style="padding: 2px 6px; font-size: 0.7rem; background: #c91c1c; color:#fff; border:none; border-radius:3px; cursor:pointer; margin-left:5px;">✨ AI Assist</button></label>
                 <input type="text" id="input-station3">
             </div>
 
             <div class="form-group full-width">
-                <label>Safety Controls & Hazards</label>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin-bottom:0;">Safety Controls & Hazards</label>
+                    <button type="button" onclick="generateSafety()" style="padding: 2px 8px; font-size: 0.75rem; background: #c91c1c; color:#fff; border-radius:3px;">✨ AI Assist</button>
+                </div>
                 <textarea id="input-safety"></textarea>
             </div>
+
             <div class="form-group full-width">
                 <label>Instructor Notes</label>
                 <textarea id="input-notes"></textarea>
@@ -117,6 +124,7 @@
                     <div style="font-size: 0.75rem; font-weight: bold; color: #333; margin-bottom: 5px;">SCAN TO SIGN</div>
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://gerber111213.github.io/lesson-plan-builder/" alt="Sign-off QR Code" style="width: 100px; height: 100px;">
                 </div>
+                
                 <div style="text-align: left; width: 55%; font-size: 0.85rem;">
                     <p><strong>Crew Sign-Off Roster:</strong></p>
                     <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">1. Printed Name: _____________________ Sig: ___________</div>
@@ -168,6 +176,7 @@
             <h3>Instructor Notes</h3>
             <div class="box-content" id="output-notes">--</div>
         </div>
+
     </div>
 
     <!-- JavaScript linked properly -->
