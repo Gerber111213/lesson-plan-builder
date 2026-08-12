@@ -118,18 +118,26 @@ function loadPlan() {
     }
 }
 
-// PDF Export Trigger
+// PDF Export Trigger (Optimized for full top-to-bottom multi-page capture)
 function exportPDF() {
     const element = document.getElementById('printable-area');
+    
     const opt = {
-        margin:       [0.4, 0.4, 0.4, 0.4],
+        margin:       [0.3, 0.3, 0.3, 0.3],
         filename:     'Fire-Training-Lesson-Plan.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false, letterRendering: true },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            logging: false,
+            letterRendering: true,
+            windowWidth: element.scrollWidth 
+        },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+        pagebreak:    { mode: ['css', 'legacy'] }
     };
+
     setTimeout(() => {
         html2pdf().from(element).set(opt).save();
-    }, 300);
+    }, 200);
 }
