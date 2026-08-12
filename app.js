@@ -1,6 +1,5 @@
 let standardsData = {};
 
-// Fetch database on load
 fetch('standards.json')
     .then(res => res.json())
     .then(data => {
@@ -12,10 +11,8 @@ fetch('standards.json')
             opt.textContent = data[key].categoryName;
             select.appendChild(opt);
         }
-    })
-    .catch(err => console.log('Error loading standards:', err));
+    });
 
-// Live text binding for basic fields
 const basicFields = ['title', 'date', 'sequence', 'station1', 'station2', 'station3', 'safety', 'notes', 'objectives'];
 basicFields.forEach(field => {
     const inputEl = document.getElementById(`input-${field}`);
@@ -27,7 +24,6 @@ basicFields.forEach(field => {
     }
 });
 
-// Handle Category Selection & Checkbox Generation
 function loadCategoryData() {
     const catKey = document.getElementById('input-category').value;
     const skillsContainer = document.getElementById('skills-checkbox-container');
@@ -40,61 +36,47 @@ function loadCategoryData() {
 
     const category = standardsData[catKey];
 
-    // Populate Skills checkboxes
-    category.skills.forEach((skill) => {
+    category.skills.forEach(skill => {
         const div = document.createElement('div');
         div.className = 'checkbox-item';
-        div.innerHTML = `
-            <label>
-                <input type="checkbox" value="${skill.name} (${skill.standard})" onchange="updateSelections()"> 
-                <strong>${skill.name}</strong> <span class="tag">(${skill.standard})</span>
-            </label>
-        `;
+        div.innerHTML = `<label><input type="checkbox" value="${skill.name} (${skill.standard})" onchange="updateSelections()"> <strong>${skill.name}</strong> <em>(${skill.standard})</em></label>`;
         skillsContainer.appendChild(div);
     });
 
-    // Populate Resources checkboxes
-    category.resources.forEach((res) => {
+    category.resources.forEach(res => {
         const div = document.createElement('div');
         div.className = 'checkbox-item';
-        div.innerHTML = `
-            <label>
-                <input type="checkbox" value="${res}" onchange="updateSelections()"> 
-                ${res}
-            </label>
-        `;
+        div.innerHTML = `<label><input type="checkbox" value="${res}" onchange="updateSelections()"> ${res}</label>`;
         resContainer.appendChild(div);
     });
 
-    // Auto-populate safety overview
-    let autoSafety = category.defaultSafety || category.skills.map(s => `• ${s.name}: ${s.description}`).join('\n');
-    document.getElementById('input-safety').value = autoSafety;
-    document.getElementById('output-safety').textContent = autoSafety;
+    if (category.defaultSafety) {
+        document.getElementById('input-safety').value = category.defaultSafety;
+        document.getElementById('output-safety').textContent = category.defaultSafety;
+    }
 }
 
-// Compile checked items into the preview sheet
 function updateSelections() {
     const selectedSkills = [];
-    document.querySelectorAll('#skills-checkbox-container input[type="checkbox"]:checked').forEach(cb => {
+    document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
         selectedSkills.push(`• ${cb.value}`);
     });
     document.getElementById('output-skills-list').textContent = selectedSkills.join('\n') || '--';
 
     const selectedRes = [];
-    document.querySelectorAll('#resources-checkbox-container input[type="checkbox"]:checked').forEach(cb => {
+    document.querySelectorAll('#resources-checkbox-container input:checked').forEach(cb => {
         selectedRes.push(`• ${cb.value}`);
     });
     document.getElementById('output-resources').textContent = selectedRes.join('\n') || '--';
 }
 
-// Local Storage Caching
 function savePlan() {
     const data = {};
     basicFields.forEach(field => {
         data[field] = document.getElementById(`input-${field}`).value;
     });
     localStorage.setItem('fireTrainingPlan', JSON.stringify(data));
-    alert('Lesson plan cached locally!');
+    alert('Saved!');
 }
 
 function loadPlan() {
@@ -107,29 +89,18 @@ function loadPlan() {
                 document.getElementById(`output-${field}`).textContent = data[field];
             }
         });
-        alert('Loaded successfully from cache.');
-    } else {
-        alert('No saved plan found.');
+        alert('Loaded!');
     }
 }
 
-// PDF Export Trigger (Targeting strictly the printable sheet container)
 function exportPDF() {
     const element = document.getElementById('printable-area');
-    
     const opt = {
-        margin:       [0.4, 0.4, 0.4, 0.4],
-        filename:     'Fire-Training-Lesson-Plan.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { 
-            scale: 2, 
-            useCORS: true, 
-            logging: false,
-            letterRendering: true 
-        },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'] }
+        margin:       0.3,
+        filename:     'Training-Plan.pdf',
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
-
     html2pdf().from(element).set(opt).save();
 }
