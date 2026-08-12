@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Training Lesson Plan Generator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -45,12 +44,18 @@
             </div>
 
             <div class="form-group full-width">
-                <label>Core Objectives</label>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin-bottom:0;">Core Objectives (SMART)</label>
+                    <button type="button" onclick="generateSmartObjectives()" style="padding: 2px 8px; font-size: 0.75rem; background: #c91c1c; color:#fff; border-radius:3px;">✨ AI Assist</button>
+                </div>
                 <textarea id="input-objectives"></textarea>
             </div>
 
             <div class="form-group full-width">
-                <label>Training Sequence / Evolutions</label>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin-bottom:0;">Training Sequence / Evolutions</label>
+                    <button type="button" onclick="generateSequence()" style="padding: 2px 8px; font-size: 0.75rem; background: #c91c1c; color:#fff; border-radius:3px;">✨ AI Assist</button>
+                </div>
                 <textarea id="input-sequence"></textarea>
             </div>
             
@@ -86,9 +91,11 @@
 
     <!-- PRINTABLE SHEET -->
     <div id="printable-area" class="lesson-plan-sheet">
+        
+        <!-- PAGE 1: EXCLUSIVE SAFETY BRIEFING & SIGN-OFF -->
         <header class="plan-header">
             <h1>RED DEER COUNTY FIRE & RESCUE</h1>
-            <h2>Training Lesson Plan</h2>
+            <h2>Mandatory Safety Briefing & Roster Sign-Off</h2>
         </header>
 
         <div class="content-section">
@@ -96,14 +103,42 @@
             <div class="box-content"><strong>Title:</strong> <span id="output-title">--</span> | <strong>Date:</strong> <span id="output-date">--</span></div>
         </div>
 
-        <div class="content-section">
-            <h3>1. Safety Briefing & Hazards</h3>
-            <div class="box-content" id="output-safety">--</div>
+        <div class="content-section" style="margin-top: 20px;">
+            <h3>Operational Safety Guidelines & Risk Assessment</h3>
+            <div class="box-content" id="output-safety" style="min-height: 120px; font-size: 1rem; line-height: 1.5;">--</div>
         </div>
+
+        <div class="content-section" style="margin-top: 30px; border: 2px dashed #2b2b2b; padding: 20px; text-align: center; background: #f9f9f9;">
+            <h3 style="background: none; color: #2b2b2b; font-size: 1rem; margin-bottom: 10px;">MEMBER SAFETY ACKNOWLEDGEMENT</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 15px; color: #555;">By signing below or scanning the QR code, members acknowledge they have read, understood, and agreed to abide by the safety controls and standard operating guidelines outlined for this evolution.</p>
+            
+            <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+                <div style="border: 1px solid #ccc; background: #fff; padding: 10px; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <!-- Placeholder QR Code representing digital sign-off link -->
+                    <div style="font-size: 0.75rem; font-weight: bold; color: #333; margin-bottom: 5px;">SCAN TO SIGN</div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://gerber111213.github.io/lesson-plan-builder/" alt="Sign-off QR Code" style="width: 100px; height: 100px;">
+                </div>
+                <div style="text-align: left; width: 55%; font-size: 0.85rem;">
+                    <p><strong>Crew Sign-Off Roster:</strong></p>
+                    <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">1. Printed Name: _____________________ Sig: ___________</div>
+                    <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">2. Printed Name: _____________________ Sig: ___________</div>
+                    <div style="border-bottom: 1px solid #999; margin-bottom: 15px; padding-bottom: 2px;">3. Printed Name: _____________________ Sig: ___________</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HARD PAGE BREAK TO PUSH LESSON PLAN TO PAGE 2 -->
+        <div class="page-break"></div>
+
+        <!-- PAGE 2: LESSON PLAN & EVOLUTIONS DOCUMENT -->
+        <header class="plan-header">
+            <h1>RED DEER COUNTY FIRE & RESCUE</h1>
+            <h2>Training Lesson Plan & Evolutions</h2>
+        </header>
 
         <div class="grid-2col">
             <div class="content-section">
-                <h3>Core Objectives</h3>
+                <h3>Core Objectives (SMART)</h3>
                 <div class="box-content" id="output-objectives">--</div>
             </div>
             <div class="content-section">
