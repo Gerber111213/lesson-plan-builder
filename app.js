@@ -56,36 +56,89 @@ function loadCategoryData() {
     }
 }
 
-// AI Assist: Generate SMART Objectives based on chosen category
+// True Context-Aware Objective Assist
 function generateSmartObjectives() {
     const catKey = document.getElementById('input-category').value;
+    const title = document.getElementById('input-title').value || "Training Drill";
     const objField = document.getElementById('input-objectives');
     const outObj = document.getElementById('output-objectives');
 
-    let text = "";
-    if (catKey === "traffic_management") {
-        text = "• Specific: Successfully establish a safe blocking corridor and cone taper.\n• Measurable: Crew sets cone taper within 3 minutes meeting provincial highway safety guidelines.\n• Achievable: Utilizing standard apparatus positioning and pylon kits.\n• Relevant: Mitigates secondary strike hazards during roadway operations.\n• Time-Bound: Evaluated during the 1-hour practical drill session.";
-    } else if (catKey === "forcible_entry") {
-        text = "• Specific: Demonstrate proper gapping, setting, and forcing technique on an inward-swinging prop.\n• Measurable: Successful door breach achieved in under 60 seconds without tool slip.\n• Achievable: Using standard halligan and axe ('The Irons').\n• Relevant: Essential for rapid interior access in structure fires.\n• Time-Bound: Completed during station rotations.";
+    // Gather checked skills
+    const selectedSkills = [];
+    document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
+        selectedSkills.push(cb.value.split(' ')[0]); // Grabs key skill terms
+    });
+
+    let currentInput = objField.value.trim();
+    let generatedText = "";
+
+    if (currentInput) {
+        // If the user typed something, use it as the operational focus and wrap it into SMART format
+        generatedText = `• Specific: Successfully execute ${title} focusing on ${currentInput}.\n` +
+                        `• Measurable: Complete all selected practical skill components (${selectedSkills.slice(0,2).join(', ') || 'core tasks'}) without critical safety deviation.\n` +
+                        `• Achievable: Utilizing standard department apparatus, PPE, and approved SOG guidelines.\n` +
+                        `• Relevant: Enhances company-level operational readiness and NFPA/Alberta competency.\n` +
+                        `• Time-Bound: Evaluated during the practical training block.`;
     } else {
-        text = "• Specific: Execute core operational maneuvers safely and efficiently.\n• Measurable: Complete all practical steps without critical safety infractions.\n• Achievable: Utilizing department apparatus, PPE, and standard tools.\n• Relevant: Maintains company-level operational readiness and NFPA competency.\n• Time-Bound: Executed within the allocated training block.";
+        // Fallback context based on category if nothing was typed yet
+        if (catKey === "traffic_management") {
+            generatedText = `• Specific: Establish safe roadway positive blocking and cone taper for ${title}.\n` +
+                            `• Measurable: Crew deploys taper meeting the 1 pylon per 10 km/h rule safely.\n` +
+                            `• Achievable: Utilizing standard pylon kits and apparatus placement.\n` +
+                            `• Relevant: Mitigates secondary strike hazards during roadway operations.\n` +
+                            `• Time-Bound: Completed within the training rotation window.`;
+        } else {
+            generatedText = `• Specific: Successfully complete operational objectives for ${title}.\n` +
+                            `• Measurable: Demonstrate proper proficiency in ${selectedSkills.join(', ') || 'assigned tasks'}.\n` +
+                            `• Achievable: Utilizing department apparatus, PPE, and standard tools.\n` +
+                            `• Relevant: Maintains company-level operational readiness.\n` +
+                            `• Time-Bound: Executed within the scheduled training session.`;
+        }
     }
 
-    objField.value = text;
-    outObj.textContent = text;
+    objField.value = generatedText;
+    outObj.textContent = generatedText;
 }
 
-// AI Assist: Generate Structured Training Sequence (No Times)
+// True Context-Aware Training Sequence Assist
 function generateSequence() {
+    const catKey = document.getElementById('input-category').value;
     const seqField = document.getElementById('input-sequence');
     const outSeq = document.getElementById('output-sequence');
 
-    let text = "1. Classroom briefing, hazard identification, and safety protocol review.\n2. Apparatus positioning, tool inspection, and personal protective equipment (PPE) check.\n3. Hands-on practical station rotations and controlled traffic safety skill execution.\n4. Tactical debrief, equipment recovery, site cleanup, and instructor review.";
+    // Gather checked skills
+    const selectedSkills = [];
+    document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
+        selectedSkills.push(cb.value.split(' ')[0]); // Grabs key skill terms
+    });
 
-    seqField.value = text;
-    outSeq.textContent = text;
+    let currentInput = seqField.value.trim();
+    let generatedText = "";
+
+    if (currentInput) {
+        // If the user typed notes, format and structure them into a professional progression
+        generatedText = `1. Initial briefing and safety walkthrough focusing on: ${currentInput}.\n` +
+                        `2. Apparatus setup, equipment staging, and personal protective equipment (PPE) compliance check.\n` +
+                        `3. Practical skill execution emphasizing ${selectedSkills.slice(0, 3).join(', ') || 'core evolutions'}.\n` +
+                        `4. Final hot wash, tactical debrief, equipment recovery, and site restoration.`;
+    } else {
+        // Category-tailored dynamic sequences if nothing was typed yet
+        if (catKey === "traffic_management") {
+            generatedText = `1. Classroom briefing, hazard identification, and Alberta OHS traffic safety review.\n` +
+                            `2. Tender/Engine positioning (45-degree fend-off) and cone taper deployment (1 pylon per 10 km/h rule).\n` +
+                            `3. Practical station rotation: single-lane alternating control, flare placement, and lookout coordination.\n` +
+                            `4. Tactical debrief, equipment recovery, site cleanup, and crew sign-off roster sign-off.`;
+        } else {
+            generatedText = `1. Classroom briefing, SOG review, and hazard identification.\n` +
+                            `2. Apparatus positioning, tool inspection, and personal protective equipment (PPE) check.\n` +
+                            `3. Hands-on practical station rotations and controlled skill execution (${selectedSkills.slice(0, 2).join(', ') || 'assigned tasks'}).\n` +
+                            `4. Tactical debrief, equipment recovery, site cleanup, and instructor review.`;
+        }
+    }
+
+    seqField.value = generatedText;
+    outSeq.textContent = generatedText;
 }
-
 function updateSelections() {
     const selectedSkills = [];
     document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
