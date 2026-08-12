@@ -87,23 +87,7 @@ button {
     padding: 40px;
     box-sizing: border-box;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    display: block; /* Ensures html2canvas reads it properly */
-}
-
-/* Red Deer County Watermark */
-.watermark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 450px;
-    height: 450px;
-    /* Replace with your official watermark image asset link or shield */
-    background: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_Deer_County_logo.svg') no-repeat center center;
-    background-size: contain;
-    opacity: 0.06;
-    pointer-events: none;
-    z-index: 1;
+    display: block;
 }
 
 .plan-header {
