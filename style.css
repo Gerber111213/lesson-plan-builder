@@ -1,191 +1,43 @@
-:root {
-    --primary-red: #c91c1c;
-    --dark-charcoal: #2b2b2b;
-    --light-grey: #f4f4f4;
-    --border-grey: #cccccc;
-    --text-main: #222222;
+.selector-box {
+    background: var(--light-grey);
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-grey);
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--dark-charcoal);
-    color: var(--text-main);
-    margin: 0;
-    padding: 20px;
-}
-
-/* Control Panel */
-.control-panel {
-    max-width: 850px;
-    background: #ffffff;
-    margin: 0 auto 30px auto;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.form-group {
+.checkbox-grid {
     display: flex;
     flex-direction: column;
-}
-
-.form-group.full-width {
-    grid-column: span 2;
-}
-
-label {
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-    color: var(--dark-charcoal);
-}
-
-input, select, textarea {
+    gap: 8px;
+    margin-top: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    background: #fff;
     padding: 8px;
     border: 1px solid var(--border-grey);
-    border-radius: 4px;
-    font-family: inherit;
 }
 
-textarea {
-    resize: vertical;
-    height: 70px;
-}
-
-.action-buttons {
-    margin-top: 20px;
+.checkbox-item label {
+    font-weight: normal;
+    font-size: 0.85rem;
     display: flex;
-    gap: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
+    align-items: center;
+    gap: 8px;
     cursor: pointer;
 }
 
-.btn-primary { background-color: var(--dark-charcoal); color: #fff; }
-.btn-secondary { background-color: #6c757d; color: #fff; }
-.btn-print { background-color: var(--primary-red); color: #fff; margin-left: auto; }
-
-/* Printable Document Styles */
-.lesson-plan-sheet {
-    position: relative;
-    width: 8.5in;
-    min-height: 11in;
-    margin: 0 auto;
-    background: #ffffff;
-    padding: 40px;
-    box-sizing: border-box;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    display: block;
+.checkbox-item input {
+    cursor: pointer;
 }
 
-.plan-header {
-    border-bottom: 3px solid var(--primary-red);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.dept-info h1 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--primary-red);
-    letter-spacing: 1px;
-}
-
-.dept-info p {
-    margin: 0;
+.tag {
     font-size: 0.75rem;
-    color: var(--dark-charcoal);
-    font-weight: bold;
+    color: #666;
+    font-style: italic;
 }
 
-.plan-header h2 {
-    margin: 10px 0 0 0;
-    font-size: 1.2rem;
-    color: var(--dark-charcoal);
-}
-
-.secondary-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--dark-charcoal);
-}
-
-.meta-block {
-    display: flex;
-    justify-content: space-between;
-    background: var(--light-grey);
-    padding: 10px 15px;
-    border-left: 4px solid var(--primary-red);
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.content-section {
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 2;
-}
-
-.content-section h3 {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    background: var(--dark-charcoal);
-    color: #ffffff;
-    padding: 5px 10px;
-    margin: 0 0 5px 0;
-}
-
-.box-content {
-    border: 1px solid var(--border-grey);
-    padding: 10px;
-    min-height: 40px;
-    background: #fff;
-    font-size: 0.9rem;
-    white-space: pre-wrap;
-}
-
-.grid-2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.stations-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-}
-
-.station-box {
-    border: 1px solid var(--border-grey);
-    padding: 8px;
-    font-size: 0.85rem;
-    background: #fff;
-}
-
-.page-break {
-    page-break-after: always;
-    margin-top: 40px;
-}
-
-/* Print Overrides */
-@media print {
-    .no-print { display: none; }
-    body { background: none; padding: 0; }
-    .lesson-plan-sheet { box-shadow: none; width: 100%; padding: 20px; }
+.placeholder-text {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
 }
