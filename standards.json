@@ -1,12 +1,108 @@
 {
-    "nfpa_1001_vent": {
-        "name": "NFPA 1001 - Vertical Roof Ventilation",
-        "objectives": "1. Demonstrate safe roof ladder placement.\n2. Execute a proper rectangular ventilation cut.\n3. Coordinate vertical venting with interior fire attack teams.",
-        "safety": "Full structural PPE with SCBA donned. Ensure 100% tie-off safety harness on pitched roofs. Check structural integrity with sounding tool before stepping onto roof surface."
+    "traffic_management": {
+        "categoryName": "Traffic Management & Scene Safety",
+        "skills": [
+            {
+                "id": "tm_01",
+                "name": "Apparatus Positioning (Fend-Off Angle)",
+                "standard": "NFPA 1901 / CSA Z1507",
+                "description": "Position apparatus at a 45-degree angle pointing away from the work zone to create a physical traffic barrier."
+            },
+            {
+                "id": "tm_02",
+                "name": "Cone Taper & Buffer Zone Deployment",
+                "standard": "Local JPR TM-04",
+                "description": "Deploy sequential traffic cones to establish an active merge taper and a protected lane buffer."
+            },
+            {
+                "id": "tm_03",
+                "name": "High-Visibility PPE & Warning Devices",
+                "standard": "CSA Z96 Class 3",
+                "description": "Don high-visibility safety vests, helmets, and deploy emergency warning triangles or flares."
+            }
+        ],
+        "resources": [
+            "Traffic Cones / Pylons (Min. 6)",
+            "ANSI/CSA Class 3 Safety Vests",
+            "Emergency Flares / LED Triangles",
+            "Air Horn (Emergency warning device)",
+            "Stop/Slow Paddle Sign"
+        ]
     },
-    "nfpa_1001_forcible": {
-        "name": "NFPA 1001 - Forcible Entry Techniques",
-        "objectives": "1. Identify door construction types (inward vs outward swinging).\n2. Properly gap, set, and force an inward-swinging door using irons.\n3. Manage door control post-breaching.",
-        "safety": "Safety glasses and leather gloves mandatory. Clear all bystanders from swing radius. Control tool leverage points to prevent slips."
+    "roof_ventilation": {
+        "categoryName": "Vertical Ventilation & Roof Operations",
+        "skills": [
+            {
+                "id": "rv_01",
+                "name": "Roof Ladder Placement & Securing",
+                "standard": "NFPA 1001 (5.3.10)",
+                "description": "Hoist, position, and securely hook a roof ladder to structural ridge or approved anchor points."
+            },
+            {
+                "id": "rv_02",
+                "name": "Sounding Structural Integrity",
+                "standard": "NFPA 1001",
+                "description": "Systematically sound the roof surface using a tool handle ahead of movement to check for stability."
+            },
+            {
+                "id": "rv_03",
+                "name": "Rectangular Ventilation Cut Sequence",
+                "standard": "NFPA 1001 / Local JPR RV-02",
+                "description": "Execute proper louver or rectangular cut sequence coordinated with interior fire attack teams."
+            }
+        ],
+        "resources": [
+            "Rotary Saw / Chainsaw (Carbide/Rescue chain)",
+            "Roof Ladder & Extension Ladder",
+            "Sounding Tool / Pike Pole",
+            "Full Structural PPE with SCBA",
+            "Roof Safety Harness & Tie-off Line"
+        ]
+    },
+    "forcible_entry": {
+        "categoryName": "Forcible Entry Techniques",
+        "skills": [
+            {
+                "id": "fe_01",
+                "name": "Inward-Swinging Door Forcing (The Irons)",
+                "standard": "NFPA 1001 (5.3.2)",
+                "description": "Properly gap, set, and force an inward-swinging door using a flat-head axe and Halligan bar."
+            },
+            {
+                "id": "fe_02",
+                "name": "Outward-Swinging Door & Padlock Control",
+                "standard": "NFPA 1001",
+                "description": "Expose hinge pins or use specialized striking techniques to defeat outward-swinging and padlock assemblies."
+            }
+        ],
+        "resources": [
+            "Halligan Bar & Flat-Head Axe ('The Irons')",
+            "K-Tool / Multi-Master Forcible Entry Kit",
+            "Safety Glasses & Heavy Leather Gloves",
+            "Door Control Straps"
+        ]
+    },
+    "water_supply": {
+        "categoryName": "Water Supply & Hydrant Operations",
+        "skills": [
+            {
+                "id": "ws_01",
+                "name": "Forward and Reverse Lay Operations",
+                "standard": "NFPA 1001 / NFPA 1002",
+                "description": "Establish efficient water supply lines from a municipal hydrant to the attack pumper."
+            },
+            {
+                "id": "ws_02",
+                "name": "Drafting Operations from Static Source",
+                "standard": "NFPA 1001",
+                "description": "Connect hard suction hose, strainers, and prime pump to draft water from a static source."
+            }
+        ],
+        "resources": [
+            "Supply Hose (2.5\" and 4\" LDH)",
+            "Hydrant Wrench & Gate Valves",
+            "Hard Suction Hose & Barrel Strainer",
+            "Portable Drafting Tank"
+        ]
     }
 }
