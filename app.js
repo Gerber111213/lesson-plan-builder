@@ -1,9 +1,10 @@
 let trainingCategories = {};
 
-// Reliable Zero-Key Free AI Gateway
+// Robust AI Caller with Cache-Busting
 async function callPublicAI(promptText) {
     const encodedPrompt = encodeURIComponent(promptText);
-    const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai&private=true`);
+    // Adding Date.now() prevents public gateways from caching old identical responses
+    const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai&private=true&seed=${Date.now()}`);
     
     if (!response.ok) throw new Error("Public AI gateway failed.");
     return await response.text();
@@ -24,14 +25,12 @@ async function generateSmartObjectives() {
     let currentInput = objField.value.trim();
     objField.value = "AI is generating custom SMART objectives...";
 
-    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Write 3 to 4 professional SMART training objectives for a fire department drill.
-CRITICAL INSTRUCTION: You must base these objectives directly and specifically on the instructor notes provided below. Do not output generic boilerplate objectives.
-- Title: ${title}
-- Category: ${categoryName}
-- Selected Skills: ${selectedSkills.join(', ') || 'General operations'}
-- Instructor Notes / Focus: ${currentInput || 'None provided. Focus strictly on custom tactical execution of the selected category.'}
+    const prompt = `Act as an expert Red Deer County fire instructor. Write 3-4 professional SMART training objectives tailored precisely to this instruction: "${currentInput}". 
+Drill Title: ${title}
+Category: ${categoryName}
+Active Skills: ${selectedSkills.join(', ') || 'General operations'}
 
-Output ONLY a clean, numbered list of 3 to 4 professional objectives. No conversational markdown headers or extra text.`;
+Return ONLY a clean numbered list of 3 to 4 objectives. No chatty text.`;
 
     try {
         const aiText = await callPublicAI(prompt);
@@ -59,14 +58,12 @@ async function generateSequence() {
     let currentInput = seqField.value.trim();
     seqField.value = "AI is designing your training sequence...";
 
-    const prompt = `You are a master fire service instructor in Red Deer County, Alberta. Create a professional, step-by-step training sequence (numbered 1 to 4) for a fire drill.
-CRITICAL INSTRUCTION: You must build this step-by-step progression specifically around the context and focus notes provided by the instructor below.
-- Title: ${title}
-- Category: ${categoryName}
-- Selected Skills: ${selectedSkills.join(', ') || 'Standard drill'}
-- Context / Instructor Notes: ${currentInput || 'None provided. Create a logical standard operational progression.'}
+    const prompt = `Act as an expert Red Deer County fire instructor. Design a 4-step practical training sequence matching this custom context: "${currentInput}".
+Drill Title: ${title}
+Category: ${categoryName}
+Active Skills: ${selectedSkills.join(', ') || 'Standard drill'}
 
-Incorporate local standards like Alberta OHS if relevant. Output ONLY the numbered steps clearly. No conversational text.`;
+Incorporate Alberta OHS standards where applicable. Return ONLY 4 clear numbered steps. No chatty text.`;
 
     try {
         const aiText = await callPublicAI(prompt);
