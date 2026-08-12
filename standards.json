@@ -1,108 +1,109 @@
 {
     "traffic_management": {
         "categoryName": "Traffic Management & Scene Safety",
-        "skills": [
-            {
-                "id": "tm_01",
-                "name": "Apparatus Positioning (Fend-Off Angle)",
-                "standard": "NFPA 1901 / CSA Z1507",
-                "description": "Position apparatus at a 45-degree angle pointing away from the work zone to create a physical traffic barrier."
-            },
-            {
-                "id": "tm_02",
-                "name": "Cone Taper & Buffer Zone Deployment",
-                "standard": "Local JPR TM-04",
-                "description": "Deploy sequential traffic cones to establish an active merge taper and a protected lane buffer."
-            },
-            {
-                "id": "tm_03",
-                "name": "High-Visibility PPE & Warning Devices",
-                "standard": "CSA Z96 Class 3",
-                "description": "Don high-visibility safety vests, helmets, and deploy emergency warning triangles or flares."
-            }
-        ],
+        "defaultSafety": "Full structural/high-visibility PPE. Establish positive blocking apparatus positioning and sequential cone tapers prior to commencing work on roadway.",
+        "skills": [],
         "resources": [
             "Traffic Cones / Pylons (Min. 6)",
             "ANSI/CSA Class 3 Safety Vests",
             "Emergency Flares / LED Triangles",
-            "Air Horn (Emergency warning device)",
-            "Stop/Slow Paddle Sign"
-        ]
-    },
-    "roof_ventilation": {
-        "categoryName": "Vertical Ventilation & Roof Operations",
-        "skills": [
-            {
-                "id": "rv_01",
-                "name": "Roof Ladder Placement & Securing",
-                "standard": "NFPA 1001 (5.3.10)",
-                "description": "Hoist, position, and securely hook a roof ladder to structural ridge or approved anchor points."
-            },
-            {
-                "id": "rv_02",
-                "name": "Sounding Structural Integrity",
-                "standard": "NFPA 1001",
-                "description": "Systematically sound the roof surface using a tool handle ahead of movement to check for stability."
-            },
-            {
-                "id": "rv_03",
-                "name": "Rectangular Ventilation Cut Sequence",
-                "standard": "NFPA 1001 / Local JPR RV-02",
-                "description": "Execute proper louver or rectangular cut sequence coordinated with interior fire attack teams."
-            }
-        ],
-        "resources": [
-            "Rotary Saw / Chainsaw (Carbide/Rescue chain)",
-            "Roof Ladder & Extension Ladder",
-            "Sounding Tool / Pike Pole",
-            "Full Structural PPE with SCBA",
-            "Roof Safety Harness & Tie-off Line"
+            "Air Horn (Emergency warning device)"
         ]
     },
     "forcible_entry": {
         "categoryName": "Forcible Entry Techniques",
-        "skills": [
-            {
-                "id": "fe_01",
-                "name": "Inward-Swinging Door Forcing (The Irons)",
-                "standard": "NFPA 1001 (5.3.2)",
-                "description": "Properly gap, set, and force an inward-swinging door using a flat-head axe and Halligan bar."
-            },
-            {
-                "id": "fe_02",
-                "name": "Outward-Swinging Door & Padlock Control",
-                "standard": "NFPA 1001",
-                "description": "Expose hinge pins or use specialized striking techniques to defeat outward-swinging and padlock assemblies."
-            }
-        ],
+        "defaultSafety": "Safety glasses and heavy leather gloves mandatory. Control tool leverage points to prevent slips and clear bystanders from swing radius.",
+        "skills": [],
         "resources": [
             "Halligan Bar & Flat-Head Axe ('The Irons')",
             "K-Tool / Multi-Master Forcible Entry Kit",
-            "Safety Glasses & Heavy Leather Gloves",
             "Door Control Straps"
         ]
     },
-    "water_supply": {
-        "categoryName": "Water Supply & Hydrant Operations",
-        "skills": [
-            {
-                "id": "ws_01",
-                "name": "Forward and Reverse Lay Operations",
-                "standard": "NFPA 1001 / NFPA 1002",
-                "description": "Establish efficient water supply lines from a municipal hydrant to the attack pumper."
-            },
-            {
-                "id": "ws_02",
-                "name": "Drafting Operations from Static Source",
-                "standard": "NFPA 1001",
-                "description": "Connect hard suction hose, strainers, and prime pump to draft water from a static source."
-            }
-        ],
+    "vehicle_extrication": {
+        "categoryName": "Vehicle Extrication & Stabilization",
+        "defaultSafety": "Full structural PPE with eye protection and heavy rescue gloves. Disconnect 12V/high-voltage power sources, crib vehicle securely before tool operation, and manage airbag deployment zones.",
+        "skills": [],
         "resources": [
-            "Supply Hose (2.5\" and 4\" LDH)",
-            "Hydrant Wrench & Gate Valves",
-            "Hard Suction Hose & Barrel Strainer",
-            "Portable Drafting Tank"
+            "Hydraulic Spreader, Cutter, and Ram Kit",
+            "Step Chocks & Cribging Blocks",
+            "Glass Management Kit & Protection Tarps",
+            "Battery-Powered Sawzall"
+        ]
+    },
+    "driving": {
+        "categoryName": "Apparatus Driving & Emergency Operations",
+        "defaultSafety": "Seatbelts mandatory for all crew members prior to apparatus movement. Comply with local provincial traffic laws and intersection protocols during emergency response modes.",
+        "skills": [],
+        "resources": [
+            "Apparatus Pre-Trip Inspection Sheets",
+            "Spotters / Backing Guide Equipment",
+            "Traffic Cones for Chute / Parking Drills"
+        ]
+    },
+    "pumping": {
+        "categoryName": "Fire Pump Operations & Hydraulics",
+        "defaultSafety": "Wear eye protection and hearing protection when operating high-pressure pump panels. Secure all discharge lines and monitor relief valves/pressure governors.",
+        "skills": [],
+        "resources": [
+            "Engine / Pumper Apparatus",
+            "Hydrant Wrenches & Gate Valves",
+            "Pressure Gauges & Intake Sleeves",
+            "Supply and Attack Hose Lines"
+        ]
+    },
+    "interior_operations": {
+        "categoryName": "Interior Firefighting Operations",
+        "defaultSafety": "Full structural firefighting PPE with SCBA fully donned and checked prior to entering IDLH atmosphere. Maintain team integrity and monitor air management (PAR checks).",
+        "skills": [],
+        "resources": [
+            "Full Structural PPE & SCBA with Spare Cylinders",
+            "Thermal Imaging Camera (TIC)",
+            "Attack Line (1.75\" or 2.5\")",
+            "Forcible Entry Irons & Pike Pole"
+        ]
+    },
+    "command_operations": {
+        "categoryName": "Incident Command & Scene Management",
+        "defaultSafety": "Establish formal Incident Command Post (ICP) in a safe, visible location outside the immediate hazard zone. Maintain accountability system (tag board/software).",
+        "skills": [],
+        "resources": [
+            "Incident Command Vest & Worksheet Board",
+            "Portable Radios with Assigned Tactical Channels",
+            "Accountability Tags / Board"
+        ]
+    },
+    "technical_rescue": {
+        "categoryName": "Technical Rescue (Rope, Confined Space, Trench)",
+        "defaultSafety": "Dual-path safety rope systems mandatory for all elevated or below-grade loads. Complete atmospheric monitoring and ventilation for confined spaces.",
+        "skills": [],
+        "resources": [
+            "Kernmantle Rescue Ropes & Webbing",
+            "Pulleys, Carabiners, and Anchor Plates",
+            "Tripod / Davit Arm System",
+            "Multi-Gas Atmospheric Monitor"
+        ]
+    },
+    "dangerous_goods": {
+        "categoryName": "Dangerous Goods / Hazmat Response",
+        "defaultSafety": "Approach upwind and uphill. Maintain safe isolation distances utilizing the Emergency Response Guidebook (ERG) until chemical identification and monitoring are complete.",
+        "skills": [],
+        "resources": [
+            "Emergency Response Guidebook (ERG)",
+            "Chemical Protective Suits (Level A/B/C)",
+            "Multi-Gas Detectors & pH Paper",
+            "Absorbent Pads & Containment Dike Material"
+        ]
+    },
+    "wildland_fire": {
+        "categoryName": "Wildland Fire Suppression & Urban Interface",
+        "defaultSafety": "Wear certified wildland PPE (nomex, boots, helmets, shroud). Identify escape routes and safety zones (LACES protocol) prior to engaging flank or head of fire.",
+        "skills": [],
+        "resources": [
+            "Wildland Nomex PPE & Fire Shelters",
+            "Pulaski, McLeod, and Drip Torches",
+            "Portable Pump & Progressive Hose Packs",
+            "Wildland Brush Engine / Utility Unit"
         ]
     }
 }
