@@ -1,10 +1,25 @@
-// Live data binding from inputs to output sheet
-const fields = ['title', 'date', 'objectives', 'skill', 'resources', 'sequence', 'station1', 'station2', 'station3', 'safety', 'notes'];
+let standardsData = {};
 
-fields.forEach(field => {
+// Fetch database on load
+fetch('standards.json')
+    .then(res => res.json())
+    .then(data => {
+        standardsData = data;
+        const select = document.getElementById('input-category');
+        for (let key in data) {
+            let opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = data[key].categoryName;
+            select.appendChild(opt);
+        }
+    })
+    .catch(err => console.log('Error loading standards:', err));
+
+// Live text binding for basic fields
+const basicFields = ['title', 'date', 'sequence', 'station1', 'station2', 'station3', 'safety', 'notes', 'objectives'];
+basicFields.forEach(field => {
     const inputEl = document.getElementById(`input-${field}`);
     const outputEl = document.getElementById(`output-${field}`);
-    
     if(inputEl && outputEl) {
         inputEl.addEventListener('input', () => {
             outputEl.textContent = inputEl.value;
@@ -12,37 +27,75 @@ fields.forEach(field => {
     }
 });
 
-// Load standard / JPR data into dropdown
-let standardsData = {};
-fetch('standards.json')
-    .then(res => res.json())
-    .then(data => {
-        standardsData = data;
-        const select = document.getElementById('input-standards');
-        for (let key in data) {
-            let opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = data[key].name;
-            select.appendChild(opt);
-        }
-    })
-    .catch(err => console.log('Standards json loading info:', err));
+// Handle Category Selection & Checkbox Generation
+function loadCategoryData() {
+    const catKey = document.getElementById('input-category').value;
+    const skillsContainer = document.getElementById('skills-checkbox-container');
+    const resContainer = document.getElementById('resources-checkbox-container');
+    
+    skillsContainer.innerHTML = '';
+    resContainer.innerHTML = '';
 
-function loadStandard() {
-    const val = document.getElementById('input-standards').value;
-    if (standardsData[val]) {
-        document.getElementById('input-objectives').value = standardsData[val].objectives;
-        document.getElementById('output-objectives').textContent = standardsData[val].objectives;
-        
-        document.getElementById('input-safety').value = standardsData[val].safety;
-        document.getElementById('output-safety').textContent = standardsData[val].safety;
-    }
+    if (!standardsData[catKey]) return;
+
+    const category = standardsData[catKey];
+
+    // Populate Skills checkboxes
+    category.skills.forEach((skill, index) => {
+        const div = document.createElement('div');
+        div.className = 'checkbox-item';
+        div.innerHTML = `
+            <label>
+                <input type="checkbox" value="${skill.name} (${skill.standard})" onchange="updateSelections()"> 
+                <strong>${skill.name}</strong> <span class="tag">(${skill.standard})</span>
+            </label>
+        `;
+        skillsContainer.appendChild(div);
+    });
+
+    // Populate Resources checkboxes
+    category.resources.forEach((res, index) => {
+        const div = document.createElement('div');
+        div.className = 'checkbox-item';
+        div.innerHTML = `
+            <label>
+                <input type="checkbox" value="${res}" onchange="updateSelections()"> 
+                ${res}
+            </label>
+        `;
+        resContainer.appendChild(div);
+    });
+
+    // Auto-populate safety overview if available
+    let autoSafety = category.skills.map(s => `• ${s.name}: ${s.description}`).join('\n');
+    document.getElementById('input-safety').value = autoSafety;
+    document.getElementById('output-safety').textContent = autoSafety;
+}
+
+// Compile checked items into the preview sheet
+function updateSelections() {
+    // Gather checked skills
+    const selectedSkills = [];
+    document.querySelectorAll('#skills-checkbox-container input[type="checkbox"]:checked').forEach(cb => {
+        selectedSkills.push(`• ${cb.value}`);
+    });
+    const skillsText = selectedSkills.join('\n');
+    document.getElementById('output-skills-list').textContent = skillsText || '--';
+
+    // Gather checked resources
+    const selectedRes = [];
+    document.querySelectorAll('#resources-checkbox-container input[type="checkbox"]:checked').forEach(cb => {
+        selectedRes.push(`• ${cb.value}`);
+    });
+    const resText = selectedRes.join('\n');
+    document.getElementById('input-resources-val') || '';
+    document.getElementById('output-resources').textContent = resText || '--';
 }
 
 // Local Storage Caching
 function savePlan() {
     const data = {};
-    fields.forEach(field => {
+    basicFields.forEach(field => {
         data[field] = document.getElementById(`input-${field}`).value;
     });
     localStorage.setItem('fireTrainingPlan', JSON.stringify(data));
@@ -53,7 +106,7 @@ function loadPlan() {
     const saved = localStorage.getItem('fireTrainingPlan');
     if (saved) {
         const data = JSON.parse(saved);
-        fields.forEach(field => {
+        basicFields.forEach(field => {
             if (data[field]) {
                 document.getElementById(`input-${field}`).value = data[field];
                 document.getElementById(`output-${field}`).textContent = data[field];
@@ -65,24 +118,17 @@ function loadPlan() {
     }
 }
 
-// PDF Export Trigger (Fixed for reliable rendering)
+// PDF Export Trigger
 function exportPDF() {
     const element = document.getElementById('printable-area');
-    
     const opt = {
-        margin:       0.2,
+        margin:       [0.4, 0.4, 0.4, 0.4],
         filename:     'Fire-Training-Lesson-Plan.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { 
-            scale: 2, 
-            useCORS: true, 
-            logging: true,
-            letterRendering: true 
-        },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas:  { scale: 2, useCORS: true, logging: false, letterRendering: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
     };
-
-    // Trigger html2pdf with a small safety timeout to ensure DOM is fully painted
     setTimeout(() => {
         html2pdf().from(element).set(opt).save();
     }, 300);
