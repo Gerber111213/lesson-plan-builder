@@ -1,27 +1,81 @@
 {
     "traffic_management": {
-        "categoryName": "Traffic Management & Scene Safety",
-        "defaultSafety": "Full structural/high-visibility PPE. Establish positive blocking apparatus positioning and sequential cone tapers prior to commencing work on roadway.",
-        "skills": [
-            { "id": "tm_01", "name": "Apparatus Positioning (Fend-Off Angle)", "standard": "NFPA 1901 / CSA Z1507", "description": "Position apparatus at a 45-degree angle pointing away from the work zone to create a physical traffic barrier." },
-            { "id": "tm_02", "name": "Cone Taper & Buffer Zone Deployment", "standard": "Local JPR TM-04", "description": "Deploy sequential traffic cones to establish an active merge taper and a protected lane buffer." },
-            { "id": "tm_03", "name": "High-Visibility Vest & PPE Donning", "standard": "NFPA 1500", "description": "Properly fit and wear ANSI/CSA Class 3 high-visibility garments on roadway operations." },
-            { "id": "tm_04", "name": "Flares & Electronic LED Signal Placement", "standard": "CSA Z1507", "description": "Safely place advance warning pyrotechnic flares or LED triangles upstream of the incident." },
-            { "id": "tm_05", "name": "Single-Lane Alternating Traffic Control", "standard": "NFPA 1001", "description": "Direct civilian traffic safely past an active accident scene using standard hand signals and wands." },
-            { "id": "tm_06", "name": "Nighttime Scene Illumination Setup", "standard": "NFPA 1901", "description": "Position floodlights and telescoping scene lights to illuminate workers without blinding oncoming drivers." },
-            { "id": "tm_07", "name": "Secondary Collision Hazard Monitoring", "standard": "NFPA 1521", "description": "Assign a dedicated safety lookout to monitor distracted or oncoming motorists approaching the buffer." },
-            { "id": "tm_08", "name": "Emergency Vehicle Demobilization & Lane Reopening", "standard": "Local SOG", "description": "Coordinate the systematic recovery of cones, equipment, and apparatus to safely restore normal traffic flow." },
-            { "id": "tm_09", "name": "Highway Incident Command Coordination", "standard": "NFPA 1561", "description": "Establish unified or single command interface with local highway maintenance or police authorities." },
-            { "id": "tm_10", "name": "Emergency Air Horn Warning Protocol", "standard": "NFPA 1500", "description": "Execute rapid evacuation warning blasts using apparatus air horns upon detecting an incoming errant vehicle." }
-        ],
-        "resources": [
-            "Traffic Cones / Pylons (Min. 8)",
-            "ANSI/CSA Class 3 Safety Vests",
-            "Emergency Flares / LED Triangles",
-            "Handheld Traffic Wands & Radios",
-            "Heavy Rescue / Engine Apparatus (Positive Block)"
-        ]
-    },
+        {
+    "categoryName": "Traffic Management & Scene Safety",
+    "defaultSafety": "Full structural/high-visibility PPE. Establish positive blocking apparatus positioning and sequential cone tapers prior to commencing work on roadway.",
+    "skills": [
+        { 
+            "id": "tm_01", 
+            "name": "Apparatus Positioning (Fend-Off Angle)", 
+            "standard": "NFPA 1901 / CSA Z1507 / Alberta OHS", 
+            "description": "Position Tender or Engine apparatus at a 45-degree angle pointing away from the work zone to create a physical traffic barrier." 
+        },
+        { 
+            "id": "tm_02", 
+            "name": "Cone Taper & Buffer Zone Deployment", 
+            "standard": "Local JPR TM-04 / Alberta Highway Regs", 
+            "description": "Deploy sequential traffic cones based on highway speeds (1 pylon per 10 km/h up to a maximum of 11 pylons) to establish an active merge taper." 
+        },
+        { 
+            "id": "tm_03", 
+            "name": "High-Visibility Vest & PPE Donning", 
+            "standard": "NFPA 1500 / CSA Z96", 
+            "description": "Properly fit and wear ANSI/CSA Class 3 high-visibility garments on roadway operations." 
+        },
+        { 
+            "id": "tm_04", 
+            "name": "Emergency Flares Placement", 
+            "standard": "CSA Z1507", 
+            "description": "Safely place advance warning pyrotechnic flares upstream of the incident buffer zone." 
+        },
+        { 
+            "id": "tm_05", 
+            "name": "Single-Lane Alternating Traffic Control", 
+            "standard": "NFPA 1001", 
+            "description": "Direct civilian traffic safely past an active accident scene using a portable stop sign and traffic wands." 
+        },
+        { 
+            "id": "tm_06", 
+            "name": "Nighttime Scene Illumination Setup", 
+            "standard": "NFPA 1901", 
+            "description": "Position floodlights and telescoping scene lights to illuminate workers without blinding oncoming drivers." 
+        },
+        { 
+            "id": "tm_07", 
+            "name": "Secondary Collision Hazard Monitoring", 
+            "standard": "NFPA 1521", 
+            "description": "Assign a dedicated safety lookout to monitor distracted or oncoming motorists approaching the buffer." 
+        },
+        { 
+            "id": "tm_08", 
+            "name": "Emergency Vehicle Demobilization & Lane Reopening", 
+            "standard": "Local SOG", 
+            "description": "Coordinate the systematic recovery of cones, equipment, and apparatus to safely restore normal traffic flow." 
+        },
+        { 
+            "id": "tm_09", 
+            "name": "Highway Incident Command Coordination", 
+            "standard": "NFPA 1561", 
+            "description": "Establish unified or single command interface with local highway maintenance or police authorities." 
+        },
+        { 
+            "id": "tm_10", 
+            "name": "Emergency Air Horn Warning Protocol", 
+            "standard": "NFPA 1500", 
+            "description": "Execute rapid evacuation warning blasts using apparatus air horns upon detecting an incoming errant vehicle." 
+        }
+    ],
+    "resources": [
+        "Traffic Cones / Pylons (Rule: 1 per 10 km/h, Max 11)",
+        "Traffic Safety Vest (ANSI/CSA Class 3)",
+        "Emergency Flares",
+        "Portable Stop Sign",
+        "Traffic Wand",
+        "Air Horn",
+        "Radio",
+        "Tender or Engine Apparatus (Positive Block)"
+    ]
+},
     "forcible_entry": {
         "categoryName": "Forcible Entry Techniques",
         "defaultSafety": "Safety glasses and heavy leather gloves mandatory. Control tool leverage points to prevent slips and clear bystanders from swing radius.",
