@@ -140,10 +140,9 @@ button:hover { opacity: 0.9; }
 .lesson-plan-sheet {
     position: relative;
     width: 8.5in;
-    min-height: 11in;
     margin: 0 auto;
     background: #ffffff;
-    padding: 40px;
+    padding: 20px 40px; /* Tightened top padding so content starts immediately at the top */
     box-sizing: border-box;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     display: block;
@@ -151,8 +150,9 @@ button:hover { opacity: 0.9; }
 
 .plan-header {
     border-bottom: 3px solid var(--primary-red);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    margin-top: 0; /* Ensures header locks directly to the top edge */
 }
 
 .dept-info h1 {
