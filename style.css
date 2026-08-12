@@ -87,6 +87,7 @@ button {
     padding: 40px;
     box-sizing: border-box;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    display: block; /* Ensures html2canvas reads it properly */
 }
 
 /* Red Deer County Watermark */
