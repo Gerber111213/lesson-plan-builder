@@ -56,9 +56,8 @@ function loadCategoryData() {
     }
 }
 
-// True Context-Aware Objective Assist
+// True Context-Aware Natural SMART Objectives Generator
 function generateSmartObjectives() {
-    const catKey = document.getElementById('input-category').value;
     const title = document.getElementById('input-title').value || "Training Drill";
     const objField = document.getElementById('input-objectives');
     const outObj = document.getElementById('output-objectives');
@@ -66,36 +65,36 @@ function generateSmartObjectives() {
     // Gather checked skills
     const selectedSkills = [];
     document.querySelectorAll('#skills-checkbox-container input:checked').forEach(cb => {
-        selectedSkills.push(cb.value.split(' ')[0]); // Grabs key skill terms
+        // Extracts clean skill names without standard codes
+        let skillName = cb.value.split('(')[0].trim();
+        selectedSkills.push(skillName);
     });
 
     let currentInput = objField.value.trim();
-    let generatedText = "";
+    let objectives = [];
 
+    // Objective 1: Operational Focus (Specific & Achievable)
     if (currentInput) {
-        // If the user typed something, use it as the operational focus and wrap it into SMART format
-        generatedText = `• Specific: Successfully execute ${title} focusing on ${currentInput}.\n` +
-                        `• Measurable: Complete all selected practical skill components (${selectedSkills.slice(0,2).join(', ') || 'core tasks'}) without critical safety deviation.\n` +
-                        `• Achievable: Utilizing standard department apparatus, PPE, and approved SOG guidelines.\n` +
-                        `• Relevant: Enhances company-level operational readiness and NFPA/Alberta competency.\n` +
-                        `• Time-Bound: Evaluated during the practical training block.`;
+        objectives.push(`1. Successfully execute ${title} by focusing on ${currentInput} using standard department apparatus and full personal protective equipment.`);
     } else {
-        // Fallback context based on category if nothing was typed yet
-        if (catKey === "traffic_management") {
-            generatedText = `• Specific: Establish safe roadway positive blocking and cone taper for ${title}.\n` +
-                            `• Measurable: Crew deploys taper meeting the 1 pylon per 10 km/h rule safely.\n` +
-                            `• Achievable: Utilizing standard pylon kits and apparatus placement.\n` +
-                            `• Relevant: Mitigates secondary strike hazards during roadway operations.\n` +
-                            `• Time-Bound: Completed within the training rotation window.`;
-        } else {
-            generatedText = `• Specific: Successfully complete operational objectives for ${title}.\n` +
-                            `• Measurable: Demonstrate proper proficiency in ${selectedSkills.join(', ') || 'assigned tasks'}.\n` +
-                            `• Achievable: Utilizing department apparatus, PPE, and standard tools.\n` +
-                            `• Relevant: Maintains company-level operational readiness.\n` +
-                            `• Time-Bound: Executed within the scheduled training session.`;
-        }
+        objectives.push(`1. Successfully execute ${title} through structured practical application and adherence to approved department SOG guidelines.`);
     }
 
+    // Objective 2: Core Skill Proficiency (Measurable)
+    if (selectedSkills.length > 0) {
+        let skillsText = selectedSkills.slice(0, 3).join(', ');
+        objectives.push(`2. Demonstrate accurate proficiency in core operational components, specifically ${skillsText}, ensuring zero critical safety deviations.`);
+    } else {
+        objectives.push(`2. Demonstrate complete technical proficiency in all assigned hands-on evolutions without compromising safety parameters.`);
+    }
+
+    // Objective 3: Scene Safety & Communication (Relevant)
+    objectives.push(`3. Maintain active hazard awareness, clear radio/verbal communication, and strict crew accountability throughout the entire training evolution.`);
+
+    // Objective 4: Time-Bound Evaluation (Time-Bound)
+    objectives.push(`4. Complete all practical station rotations, tactical debriefs, and site restoration within the scheduled shift training window.`);
+
+    let generatedText = objectives.join('\n');
     objField.value = generatedText;
     outObj.textContent = generatedText;
 }
