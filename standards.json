@@ -1,1 +1,12 @@
-
+{
+    "nfpa_1001_vent": {
+        "name": "NFPA 1001 - Vertical Roof Ventilation",
+        "objectives": "1. Demonstrate safe roof ladder placement.\n2. Execute a proper rectangular ventilation cut.\n3. Coordinate vertical venting with interior fire attack teams.",
+        "safety": "Full structural PPE with SCBA donned. Ensure 100% tie-off safety harness on pitched roofs. Check structural integrity with sounding tool before stepping onto roof surface."
+    },
+    "nfpa_1001_forcible": {
+        "name": "NFPA 1001 - Forcible Entry Techniques",
+        "objectives": "1. Identify door construction types (inward vs outward swinging).\n2. Properly gap, set, and force an inward-swinging door using irons.\n3. Manage door control post-breaching.",
+        "safety": "Safety glasses and leather gloves mandatory. Clear all bystanders from swing radius. Control tool leverage points to prevent slips."
+    }
+}
