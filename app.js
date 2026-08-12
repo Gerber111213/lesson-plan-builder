@@ -1,13 +1,43 @@
 let trainingCategories = {};
 
-// Robust AI Caller with Cache-Busting
-async function callPublicAI(promptText) {
-    const encodedPrompt = encodeURIComponent(promptText);
-    // Adding Date.now() prevents public gateways from caching old identical responses
-    const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai&private=true&seed=${Date.now()}`);
+const GROQ_MODEL = "llama-3.3-70b-versatile";
+
+// Securely gets or prompts for the Groq API key using browser storage
+function getGroqApiKey() {
+    let apiKey = localStorage.getItem('groq_api_key');
+    if (!apiKey) {
+        apiKey = prompt("Enter your free Groq API key (saved securely in your browser):");
+        if (apiKey) {
+            localStorage.setItem('groq_api_key', apiKey.trim());
+        }
+    }
+    return apiKey;
+}
+
+async function callGroqAI(promptText) {
+    const apiKey = getGroqApiKey();
+    if (!apiKey) throw new Error("API key missing.");
+
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            model: GROQ_MODEL,
+            messages: [{ role: "user", content: promptText }],
+            temperature: 0.7
+        })
+    });
     
-    if (!response.ok) throw new Error("Public AI gateway failed.");
-    return await response.text();
+    if (!response.ok) {
+        const err = await response.text();
+        throw new Error(`Groq API error: ${err}`);
+    }
+    
+    const data = await response.json();
+    return data.choices[0].message.content;
 }
 
 async function generateSmartObjectives() {
@@ -25,20 +55,21 @@ async function generateSmartObjectives() {
     let currentInput = objField.value.trim();
     objField.value = "AI is generating custom SMART objectives...";
 
-    const prompt = `Act as an expert Red Deer County fire instructor. Write 3-4 professional SMART training objectives tailored precisely to this instruction: "${currentInput}". 
+    const prompt = `Act as an expert Red Deer County fire instructor. Write 3 to 4 professional SMART training objectives tailored precisely to the instructor's notes provided below.
 Drill Title: ${title}
 Category: ${categoryName}
 Active Skills: ${selectedSkills.join(', ') || 'General operations'}
+Instructor Notes / Specific Focus: ${currentInput || 'None provided. Focus on precise tactical execution.'}
 
-Return ONLY a clean numbered list of 3 to 4 objectives. No chatty text.`;
+Return ONLY a clean numbered list of 3 to 4 objectives. No conversational chat.`;
 
     try {
-        const aiText = await callPublicAI(prompt);
+        const aiText = await callGroqAI(prompt);
         objField.value = aiText.trim();
         if (outObj) outObj.textContent = aiText.trim();
     } catch (error) {
         console.error(error);
-        objField.value = "1. Successfully execute training drill safely.\n2. Complete all operational skills.\n3. Maintain crew accountability.";
+        objField.value = "Error connecting to AI. Please check your API key.";
         if (outObj) outObj.textContent = objField.value;
     }
 }
@@ -63,16 +94,16 @@ Drill Title: ${title}
 Category: ${categoryName}
 Active Skills: ${selectedSkills.join(', ') || 'Standard drill'}
 
-Incorporate Alberta OHS standards where applicable. Return ONLY 4 clear numbered steps. No chatty text.`;
+Incorporate Alberta OHS standards where applicable. Return ONLY 4 clear numbered steps. No conversational text.`;
 
     try {
-        const aiText = await callPublicAI(prompt);
+        const aiText = await callGroqAI(prompt);
         seqField.value = aiText.trim();
         if (outSeq) outSeq.textContent = aiText.trim();
     } catch (error) {
         console.error(error);
-        seqField.value = "1. Briefing and safety check.\n2. Apparatus setup.\n3. Practical rotations.\n4. Hot wash and debrief.";
-        if (outSeq) outSeq.textContent = seqField.value;
+        seqField.value = "Error connecting to AI. Please check your API key.";
+        if (outSeq) outSeq.textContent = objField.value;
     }
 }
 
